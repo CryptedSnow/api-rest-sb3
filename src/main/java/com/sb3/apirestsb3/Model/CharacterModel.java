@@ -17,12 +17,12 @@ public class CharacterModel {
     private String name;
 
     @NotBlank(message = "Race is required.")
-    @Size(max = 10, message = "Race must be deve in max 10 characters.")
+    @Size(max = 15, message = "Race must be deve in max 15 characters.")
     @Column(name="race")
     private String race;
 
     @NotBlank(message = "Gender is required.")
-    @Size(max = 10, message = "Gender must be max 10 characters.")
+    @Size(max = 15, message = "Gender must be max 15 characters.")
     @Column(name="gender")
     private String gender;
 
@@ -31,7 +31,7 @@ public class CharacterModel {
     private String type_class;
 
     @NotNull(message = "Age is required.")
-    @Min(value = 10, message = "Age must has min 10 years old.")
+    @Min(value = 15, message = "Age must has min 15 years old.")
     @Column(name="age")
     private Integer age;
 
@@ -42,21 +42,22 @@ public class CharacterModel {
     private Float height;
 
     @NotBlank(message = "Element is required.")
-    @Size(max = 10, message = "Element must be max 10 characters.")
+    @Size(max = 15, message = "Element must be max 15 characters.")
     @Column(name="element")
     private String element;
 
     @NotBlank(message = "Origin is required.")
-    @Size(max = 10, message = "Origin must be max 10 characters.")
+    @Size(max = 15, message = "Origin must be max 15 characters.")
     @Column(name="origin")
     private String origin;
 
     @NotBlank(message = "Weapon is required.")
-    @Size(max = 10, message = "Weapon must be max 10 characters.")
+    @Size(max = 15, message = "Weapon must be max 15 characters.")
     @Column(name="weapon")
     private String weapon;
 
     @NotBlank(message = "Alignment is required.")
+    @Size(max = 15, message = "Aligment must be max 15 characters.")
     @Column(name="alignment")
     private String alignment;
 

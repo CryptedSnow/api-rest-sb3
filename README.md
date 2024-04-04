@@ -18,7 +18,7 @@ api-rest-sb3
     |            |__ Service
     |                |__ CharacterService.java
     |__ resources
-         |__ application.properties
+        |__ application.properties
 ```
 
 ### Application Structure
@@ -53,37 +53,45 @@ spring.datasource.mysql.driver-class-name=com.mysql.cj.jdbc.Driver
 3 - Create a table called ```characters``` (the table name is configured in ```CharacterModel.java```), then insert this code snippet to speed up the process.
 
 ```
-# PostgreSQL
+-- PostgreSQL
 CREATE TABLE characters (
     id SERIAL PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
-    race VARCHAR(10) NOT NULL,
-    gender VARCHAR(10) NOT NULL,
-    type_class VARCHAR(10) NOT NULL,
+    race VARCHAR(15) NOT NULL,
+    gender VARCHAR(15) NOT NULL,
+    type_class VARCHAR(15) NOT NULL,
     age INT NOT NULL,
     height DECIMAL(3,2) NOT NULL,
-    element VARCHAR(10) NOT NULL,
-    origin VARCHAR(10) NOT NULL,
-    weapon VARCHAR(10) NOT NULL,
-    alignment VARCHAR(10) NOT NULL,
+    element VARCHAR(15) NOT NULL,
+    origin VARCHAR(15) NOT NULL,
+    weapon VARCHAR(15) NOT NULL,
+    alignment VARCHAR(15) NOT NULL,
     alive BOOLEAN NOT NULL
 );
 
-# MySQL
+-- MySQL
 CREATE TABLE characters (
     id PRIMARY KEY NOT NULL AUTO_INCREMENT,
     name VARCHAR(50) NOT NULL,
-    race VARCHAR(10) NOT NULL,
-    gender VARCHAR(10) NOT NULL,
-    type_class VARCHAR(10) NOT NULL,
+    race VARCHAR(15) NOT NULL,
+    gender VARCHAR(15) NOT NULL,
+    type_class VARCHAR(15) NOT NULL,
     age INT NOT NULL,
     height DECIMAL(3,2) NOT NULL,
-    element VARCHAR(10) NOT NULL,
-    origin VARCHAR(10) NOT NULL,
-    weapon VARCHAR(10) NOT NULL,
-    alignment VARCHAR(10) NOT NULL,
+    element VARCHAR(15) NOT NULL,
+    origin VARCHAR(15) NOT NULL,
+    weapon VARCHAR(15) NOT NULL,
+    alignment VARCHAR(15) NOT NULL,
     alive BOOLEAN NOT NULL
 );
+
+-- Insert lines
+INSERT INTO characters (name, race, gender, type_class, age, height, element, origin, weapon, alignment, alive) 
+VALUES
+('Mardek Innanu El-Enkidu', 'Human', 'Male', 'Recruit', 18, 1.78, 'Light', 'Goznor', 'Sword', 'Lawful Good', true),
+('Deugan Selmae Eh-Deredu', 'Human', 'Male', 'Recruit', 18, 1.77, 'Earth', 'Goznor', 'Greatsword', 'Neutral Good', true),
+('Emela Andra Wu-Jardu', 'Human', 'Female', 'Elemance', 18, 1.75, 'Water', 'Water Temple', 'Rod', 'Lawful Neutral', true),
+('Vehrn Juonour El-Ganobyi', 'Human', 'Male', 'Paladin', 25, 1.77, 'Light', 'Belfan', 'Sword', 'Lawful Good', true);
 ```
 
 ## API REST Address 
@@ -99,27 +107,55 @@ Go for some API Client tool to perform the API testing, use [POSTMAN](https://ww
     "name": "Mardek Innanu El-Enkidu",
     "race": "Human",
     "gender": "Male",
-    "type_class": "Royal Knight",
-    "age": 21,
+    "type_class": "Recruit",
+    "age": 18,
     "height": 1.78,
     "element": "Light",
-    "origin": "Belfan",
+    "origin": "Goznor",
     "weapon": "Sword",
     "alignment": "Lawful Good",
     "alive": true
   },
   {
     "id": 2,
-    "name": "Elwyen Sirene Wu-Nympha",
+    "name": "Deugan Selmae Eh-Deredu",
+    "race": "Human",
+    "gender": "Male",
+    "type_class": "Recruit",
+    "age": 18,
+    "height": 1.77,
+    "element": "Earth",
+    "origin": "Goznor",
+    "weapon": "Greatsword",
+    "alignment": "Neutral Good",
+    "alive": true
+  },
+  {
+    "id": 3,
+    "name": "Emela Andra Wu-Jardu",
     "race": "Human",
     "gender": "Female",
-    "type_class": "Siren",
-    "age": 17,
-    "height": 1.7,
+    "type_class": "Elemance",
+    "age": 18,
+    "height": 1.75,
     "element": "Water",
+    "origin": "Water Temple",
+    "weapon": "Rod",
+    "alignment": "Lawful Neutral",
+    "alive": true
+  },
+  {
+    "id": 4,
+    "name": "Vehrn Juonour El-Ganobyi",
+    "race": "Human",
+    "gender": "Male",
+    "type_class": "Paladin",
+    "age": 25,
+    "height": 1.77,
+    "element": "Light",
     "origin": "Belfan",
-    "weapon": "Harp",
-    "alignment": "Chaotic Neutral",
+    "weapon": "Sword",
+    "alignment": "Lawful Good",
     "alive": true
   }
 ]
@@ -129,32 +165,32 @@ Go for some API Client tool to perform the API testing, use [POSTMAN](https://ww
 ```
 // JSON Content
 {
-  "name": "Deugan Selmae Eh-Deredu",
+  "name": "Elwyen Sirene Wu-Nympha",
   "race": "Human",
-  "gender": "Male",
-  "type_class": "War Hero",
-  "age": 21,
-  "height": 1.77,
-  "element": "Earth",
-  "origin": "Belfan",
-  "weapon": "Greatsword",
-  "alignment": "Neutral Good",
+  "gender": "Female",
+  "type_class": "Youngling",
+  "age": 14,
+  "height": 1.61,
+  "element": "Water",
+  "origin": "Canonia",
+  "weapon": "Harp",
+  "alignment": "Chaotic Neutral",
   "alive": true
 }
 
 // Response
 {
-  "id": 3,
-  "name": "Deugan Selmae Eh-Deredu",
+  "id": 5,
+  "name": "Elwyen Sirene Wu-Nympha",
   "race": "Human",
-  "gender": "Male",
-  "type_class": "War Hero",
-  "age": 21,
-  "height": 1.77,
-  "element": "Earth",
-  "origin": "Belfan",
-  "weapon": "Greatsword",
-  "alignment": "Neutral Good",
+  "gender": "Female",
+  "type_class": "Youngling",
+  "age": 14,
+  "height": 1.61,
+  "element": "Water",
+  "origin": "Canonia",
+  "weapon": "Harp",
+  "alignment": "Chaotic Neutral",
   "alive": true
 }
 ```
@@ -163,51 +199,72 @@ Go for some API Client tool to perform the API testing, use [POSTMAN](https://ww
 ```
 // Response
 {
-  "id": 3,
-  "name": "Deugan Selmae Eh-Deredu",
+  "id": 5,
+  "name": "Elwyen Sirene Wu-Nympha",
   "race": "Human",
-  "gender": "Male",
-  "type_class": "War Hero",
-  "age": 21,
-  "height": 1.77,
-  "element": "Earth",
-  "origin": "Belfan",
-  "weapon": "Greatsword",
-  "alignment": "Neutral Good",
+  "gender": "Female",
+  "type_class": "Youngling",
+  "age": 14,
+  "height": 1.61,
+  "element": "Water",
+  "origin": "Canonia",
+  "weapon": "Harp",
+  "alignment": "Chaotic Neutral",
   "alive": true
 }
+```
+
+**GET: localhost:8080/api/character/search?name=El-Enkidu**
+```
+// Response
+[
+  {
+    "id": 1,
+    "name": "Mardek Innanu El-Enkidu",
+    "race": "Human",
+    "gender": "Male",
+    "type_class": "Recruit",
+    "age": 18,
+    "height": 1.78,
+    "element": "Light",
+    "origin": "Goznor",
+    "weapon": "Sword",
+    "alignment": "Lawful Good",
+    "alive": true
+  }
+]
 ```
 
 **PUT: localhost:8080/api/character/id**
 ```
 // JSON Content
 {
-  "name": "Deugan Selmae Eh-Deredu",
+  "name": "Elwyen Sirene Wu-Nympha",
   "race": "Human",
-  "gender": "Male",
-  "type_class": "War Hero",
-  "age": 21,
-  "height": 1.75, // Changed here
-  "element": "Earth",
-  "origin": "Belfan",
-  "weapon": "Greatsword",
-  "alignment": "Neutral Good",
+  "gender": "Female",
+  "type_class": "Youngling",
+  "age": 14,
+  "height": 1.65, // I changed here
+  "element": "Water",
+  "origin": "Canonia",
+  "weapon": "Harp",
+  "alignment": "Chaotic Neutral",
   "alive": true
 }
 
 // Response
 {
-  "id": 3,
-  "name": "Deugan Selmae Eh-Deredu",
+  "id": 5,
+  "name": "Elwyen Sirene Wu-Nympha",
   "race": "Human",
-  "gender": "Male",
-  "type_class": "War Hero",
-  "age": 21,
-  "height": 1.75,
-  "element": "Earth",
-  "origin": "Belfan",
-  "weapon": "Greatsword",
-  "alignment": "Neutral Good",
+  "gender": "Female",
+  "type_class": "Youngling",
+  "age": 14,
+  "height": 1.65,
+  "element": "Water",
+  "origin": "Canonia",
+  "weapon": "Harp",
+  "alignment": "Chaotic Neutral",
   "alive": true
 }
 ```
@@ -215,7 +272,7 @@ Go for some API Client tool to perform the API testing, use [POSTMAN](https://ww
 **DELETE: localhost:8080/api/character/id**
 ```
 // Response
-Deugan Selmae Eh-Deredu was deleted successfully.
+Elwyen Sirene Wu-Nympha was deleted successfully.
 ```
 ### Reference
 - **[Mardek](https://figverse.fandom.com/wiki/MARDEK_(Series))**

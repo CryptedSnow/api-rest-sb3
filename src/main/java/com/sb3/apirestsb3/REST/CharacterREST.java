@@ -60,6 +60,17 @@ public class CharacterREST {
         }
     }
 
+    @GetMapping("/character/search") // GET: localhost:8080/api/character/search?name=NameCharacter
+    public ResponseEntity<Object> searchByName(@RequestParam String name) {
+        List<CharacterModel> characters = characterService.search(name);
+        if (characters.isEmpty()) {
+            String message = "Character " + name + " not found.";
+            return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+        } else {
+            return ResponseEntity.ok(characters);
+        }
+    }
+
     @PutMapping("/character/{id}") // PUT: localhost:8080/api/character/id
     public ResponseEntity<Object> update(@PathVariable int id, @Valid @RequestBody CharacterModel characterModel, BindingResult bindingResult) {
         characterModel.setName(characterModel.getName().trim());
