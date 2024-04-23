@@ -1,11 +1,11 @@
 package com.sb3.apirestsb3.REST;
 
-import com.sb3.apirestsb3.Model.CharacterModel;
-import com.sb3.apirestsb3.Service.CharacterService;
-import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.sb3.apirestsb3.Entity.*;
+import com.sb3.apirestsb3.Service.*;
+import jakarta.validation.*;
+import org.springframework.beans.factory.annotation.*;
 import org.springframework.http.*;
-import org.springframework.validation.BindingResult;
+import org.springframework.validation.*;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -21,9 +21,9 @@ public class CharacterREST {
         this.characterService = theCharacterService;
     }
 
-    @GetMapping("/character") // GET: localhost:8080/api/character
+    @GetMapping("/character")
     public ResponseEntity<Object> index() {
-        List<CharacterModel> characters = characterService.index();
+        List<CharacterEntity> characters = characterService.index();
         if (characters.isEmpty()) {
             String message = "No characters found.";
             return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
@@ -32,26 +32,26 @@ public class CharacterREST {
         }
     }
 
-    @PostMapping("/character") // POST: localhost:8080/api/character
-    public ResponseEntity<Object> create(@Valid @RequestBody CharacterModel characterModel, BindingResult bindingResult) {
-        characterModel.setName(characterModel.getName().trim());
-        characterModel.setRace(characterModel.getRace().trim());
-        characterModel.setGender(characterModel.getGender().trim());
-        characterModel.setType_class(characterModel.getType_class().trim());
-        characterModel.setElement(characterModel.getElement().trim());
-        characterModel.setOrigin(characterModel.getOrigin().trim());
-        characterModel.setWeapon(characterModel.getWeapon().trim());
-        characterModel.setAlignment(characterModel.getAlignment().trim());
+    @PostMapping("/character")
+    public ResponseEntity<Object> create(@Valid @RequestBody CharacterEntity characterEntity, BindingResult bindingResult) {
+        characterEntity.setName(characterEntity.getName().trim());
+        characterEntity.setRace(characterEntity.getRace().trim());
+        characterEntity.setGender(characterEntity.getGender().trim());
+        characterEntity.setType_class(characterEntity.getType_class().trim());
+        characterEntity.setElement(characterEntity.getElement().trim());
+        characterEntity.setOrigin(characterEntity.getOrigin().trim());
+        characterEntity.setWeapon(characterEntity.getWeapon().trim());
+        characterEntity.setAlignment(characterEntity.getAlignment().trim());
         if (bindingResult.hasErrors()) {
             return handleValidationErrors(bindingResult);
         }
-        CharacterModel createdCharacter = characterService.create(characterModel);
+        CharacterEntity createdCharacter = characterService.create(characterEntity);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdCharacter);
     }
 
-    @GetMapping("/character/{id}") // GET: localhost:8080/api/character/id
+    @GetMapping("/character/{id}")
     public ResponseEntity<Object> read(@PathVariable int id) {
-        CharacterModel character = characterService.read(id);
+        CharacterEntity character = characterService.read(id);
         if (character != null) {
             return ResponseEntity.ok(character);
         } else {
@@ -60,9 +60,9 @@ public class CharacterREST {
         }
     }
 
-    @GetMapping("/character/search") // GET: localhost:8080/api/character/search?name=NameCharacter
+    @GetMapping("/character/search")
     public ResponseEntity<Object> searchByName(@RequestParam String name) {
-        List<CharacterModel> characters = characterService.search(name);
+        List<CharacterEntity> characters = characterService.search(name);
         if (characters.isEmpty()) {
             String message = "Character " + name + " not found.";
             return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
@@ -71,32 +71,82 @@ public class CharacterREST {
         }
     }
 
-    @PutMapping("/character/{id}") // PUT: localhost:8080/api/character/id
-    public ResponseEntity<Object> update(@PathVariable int id, @Valid @RequestBody CharacterModel characterModel, BindingResult bindingResult) {
-        characterModel.setName(characterModel.getName().trim());
-        characterModel.setRace(characterModel.getRace().trim());
-        characterModel.setGender(characterModel.getGender().trim());
-        characterModel.setType_class(characterModel.getType_class().trim());
-        characterModel.setElement(characterModel.getElement().trim());
-        characterModel.setOrigin(characterModel.getOrigin().trim());
-        characterModel.setWeapon(characterModel.getWeapon().trim());
-        characterModel.setAlignment(characterModel.getAlignment().trim());
+    @PutMapping("/character/{id}")
+    public ResponseEntity<Object> update(@PathVariable int id, @Valid @RequestBody CharacterEntity characterEntity, BindingResult bindingResult) {
+        characterEntity.setName(characterEntity.getName().trim());
+        characterEntity.setRace(characterEntity.getRace().trim());
+        characterEntity.setGender(characterEntity.getGender().trim());
+        characterEntity.setType_class(characterEntity.getType_class().trim());
+        characterEntity.setElement(characterEntity.getElement().trim());
+        characterEntity.setOrigin(characterEntity.getOrigin().trim());
+        characterEntity.setWeapon(characterEntity.getWeapon().trim());
+        characterEntity.setAlignment(characterEntity.getAlignment().trim());
         if (bindingResult.hasErrors()) {
             return handleValidationErrors(bindingResult);
         }
-        CharacterModel existingCharacter = characterService.read(id);
+        CharacterEntity existingCharacter = characterService.read(id);
         if (existingCharacter == null) {
             String message = "ID " + id + " not found.";
             return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
         }
-        characterModel.setId(id);
-        CharacterModel updatedCharacter = characterService.update(characterModel);
+        characterEntity.setId(id);
+        CharacterEntity updatedCharacter = characterService.update(characterEntity);
         return ResponseEntity.ok(updatedCharacter);
     }
 
-    @DeleteMapping("/character/{id}") // DELETE: localhost:8080/api/character/id
+    @GetMapping("/trash-character/{id}")
+    public ResponseEntity<Object> trash(@PathVariable int id) {
+        CharacterEntity character = characterService.read(id);
+        if (character != null) {
+            String name = character.getName();
+            characterService.trash(id);
+            String message = name + " is at trash.";
+            return new ResponseEntity<>(message, HttpStatus.OK);
+        } else {
+            String message = "ID " + id + " not found.";
+            return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/character-trash")
+    public ResponseEntity<Object> indexTrash() {
+        List<CharacterEntity> characters = characterService.indexTrash();
+        if (characters.isEmpty()) {
+            String message = "No characters deleted found.";
+            return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+        } else {
+            return ResponseEntity.ok(characters);
+        }
+    }
+
+    @GetMapping("/character/search-trash")
+    public ResponseEntity<Object> searchByNameTrash(@RequestParam String name) {
+        List<CharacterEntity> characters = characterService.searchTrash(name);
+        if (characters.isEmpty()) {
+            String message = "Character " + name + " not found.";
+            return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+        } else {
+            return ResponseEntity.ok(characters);
+        }
+    }
+
+    @GetMapping("/restore-character-trash/{id}")
+    public ResponseEntity<Object> restore(@PathVariable int id) {
+        CharacterEntity character = characterService.read(id);
+        if (character != null) {
+            String name = character.getName();
+            characterService.restore(id);
+            String message = name + " was restored.";
+            return new ResponseEntity<>(message, HttpStatus.OK);
+        } else {
+            String message = "ID " + id + " not found to restore.";
+            return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @DeleteMapping("/character-delete/{id}")
     public ResponseEntity<Object> delete(@PathVariable int id) {
-        CharacterModel character = characterService.read(id);
+        CharacterEntity character = characterService.read(id);
         if (character != null) {
             String name = character.getName();
             characterService.delete(id);

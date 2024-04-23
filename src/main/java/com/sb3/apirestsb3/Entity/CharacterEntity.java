@@ -1,11 +1,13 @@
-package com.sb3.apirestsb3.Model;
+package com.sb3.apirestsb3.Entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
+import java.time.*;
+
 @Entity
 @Table(name="characters")
-public class CharacterModel {
+public class CharacterEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,7 +33,7 @@ public class CharacterModel {
     private String type_class;
 
     @NotNull(message = "Age is required.")
-    @Min(value = 15, message = "Age must has min 15 years old.")
+    @Min(value = 14, message = "Age must has min 14 years old.")
     @Column(name="age")
     private Integer age;
 
@@ -65,11 +67,14 @@ public class CharacterModel {
     @Column(name="alive")
     private Boolean alive;
 
-    public CharacterModel() {  // No-arg constructor for JPA
+    @Column(name = "deleted_at")
+    private LocalDateTime deleted_at;
+
+    public CharacterEntity() {
 
     }
 
-    public CharacterModel(int id, String name, String race, String gender, String type_class, Integer age, Float height, String element, String origin, String weapon, String alignment, Boolean alive) {
+    public CharacterEntity(int id, String name, String race, String gender, String type_class, Integer age, Float height, String element, String origin, String weapon, String alignment, Boolean alive, LocalDateTime deleted_at) {
         this.id = id;
         this.name = name;
         this.race = race;
@@ -82,6 +87,7 @@ public class CharacterModel {
         this.weapon = weapon;
         this.alignment = alignment;
         this.alive = alive;
+        this.deleted_at = deleted_at;
     }
 
     public int getId() { return id; }
@@ -131,4 +137,9 @@ public class CharacterModel {
     public Boolean getAlive() { return alive; }
 
     public void setAlive(Boolean alive) { this.alive = alive; }
+
+    public LocalDateTime getDeleted_at() { return deleted_at; }
+
+    public void setDeleted_at(LocalDateTime deleted_at) { this.deleted_at = deleted_at; }
+    
 }

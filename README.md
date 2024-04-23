@@ -9,8 +9,8 @@ api-rest-sb3
     |            |__ DAO
     |            |   |__ CharacterDAO.java
     |            |
-    |            |__ Model
-    |            |   |__ CharacterModel.java
+    |            |__ Entity
+    |            |   |__ CharacterEntity.java
     |            |
     |            |__ REST
     |            |   |__ CharacterREST.java
@@ -23,7 +23,7 @@ api-rest-sb3
 
 ### Application Structure
 
-* ```CharacterModel.java```: Work with informations of database.
+* ```CharacterEntity.java```: Work with informations of database.
 * ```CharacterDAO.java```: Interface containing methods for data management.
 * ```CharacterService.java```: implementing methods defined in the interface.
 * ```CharacterREST.java```: HTTP CRUD (Create, Read, Update, Delete) methods to enable client-server communication.
@@ -50,7 +50,7 @@ spring.datasource.mysql.driver-class-name=com.mysql.cj.jdbc.Driver
 
 2 - Create a database with the name that you desire (it needs be the same configured in ```application.properties```)
 
-3 - Create a table called ```characters``` (the table name is configured in ```CharacterModel.java```), then insert this code snippet to speed up the process.
+3 - Create a table called ```characters``` (the table name is configured in ```CharacterEntity.java```), then insert this code snippet to speed up the process.
 
 ```
 -- PostgreSQL
@@ -66,7 +66,8 @@ CREATE TABLE characters (
     origin VARCHAR(15) NOT NULL,
     weapon VARCHAR(15) NOT NULL,
     alignment VARCHAR(15) NOT NULL,
-    alive BOOLEAN NOT NULL
+    alive BOOLEAN NOT NULL,
+    deleted_at TIMESTAMP
 );
 
 -- MySQL
@@ -82,7 +83,8 @@ CREATE TABLE characters (
     origin VARCHAR(15) NOT NULL,
     weapon VARCHAR(15) NOT NULL,
     alignment VARCHAR(15) NOT NULL,
-    alive BOOLEAN NOT NULL
+    alive BOOLEAN NOT NULL,
+    deleted_at TIMESTAMP
 );
 
 -- Insert lines
@@ -114,7 +116,8 @@ Go for some API Client tool to perform the API testing, use [POSTMAN](https://ww
     "origin": "Goznor",
     "weapon": "Sword",
     "alignment": "Lawful Good",
-    "alive": true
+    "alive": true,
+    "deleted_at": null
   },
   {
     "id": 2,
@@ -128,7 +131,8 @@ Go for some API Client tool to perform the API testing, use [POSTMAN](https://ww
     "origin": "Goznor",
     "weapon": "Greatsword",
     "alignment": "Neutral Good",
-    "alive": true
+    "alive": true,
+    "deleted_at": null
   },
   {
     "id": 3,
@@ -142,7 +146,8 @@ Go for some API Client tool to perform the API testing, use [POSTMAN](https://ww
     "origin": "Water Temple",
     "weapon": "Rod",
     "alignment": "Lawful Neutral",
-    "alive": true
+    "alive": true,
+    "deleted_at": null
   },
   {
     "id": 4,
@@ -156,7 +161,8 @@ Go for some API Client tool to perform the API testing, use [POSTMAN](https://ww
     "origin": "Belfan",
     "weapon": "Sword",
     "alignment": "Lawful Good",
-    "alive": true
+    "alive": true,
+    "deleted_at": null
   }
 ]
 ```
@@ -191,7 +197,8 @@ Go for some API Client tool to perform the API testing, use [POSTMAN](https://ww
   "origin": "Canonia",
   "weapon": "Harp",
   "alignment": "Chaotic Neutral",
-  "alive": true
+  "alive": true,
+  "deleted_at": null
 }
 ```
 
@@ -210,7 +217,8 @@ Go for some API Client tool to perform the API testing, use [POSTMAN](https://ww
   "origin": "Canonia",
   "weapon": "Harp",
   "alignment": "Chaotic Neutral",
-  "alive": true
+  "alive": true,
+  "deleted_at": null
 }
 ```
 
@@ -230,7 +238,8 @@ Go for some API Client tool to perform the API testing, use [POSTMAN](https://ww
     "origin": "Goznor",
     "weapon": "Sword",
     "alignment": "Lawful Good",
-    "alive": true
+    "alive": true,
+    "deleted_at": null
   }
 ]
 ```
@@ -244,7 +253,7 @@ Go for some API Client tool to perform the API testing, use [POSTMAN](https://ww
   "gender": "Female",
   "type_class": "Youngling",
   "age": 14,
-  "height": 1.65, // I changed here
+  "height": 1.65, // I changed 1.61 m to 1.65 m
   "element": "Water",
   "origin": "Canonia",
   "weapon": "Harp",
@@ -265,14 +274,72 @@ Go for some API Client tool to perform the API testing, use [POSTMAN](https://ww
   "origin": "Canonia",
   "weapon": "Harp",
   "alignment": "Chaotic Neutral",
-  "alive": true
+  "alive": true,
+  "deleted_at": null
 }
 ```
 
-**DELETE: localhost:8080/api/character/id**
+**GET: localhost:8080/api/trash-character/id**
 ```
 // Response
-Elwyen Sirene Wu-Nympha was deleted successfully.
+Elwyen Sirene Wu-Nympha is at trash.
 ```
+
+**GET: localhost:8080/api/character-trash**
+```
+// Response
+[
+  {
+    "id": 5,
+    "name": "Elwyen Sirene Wu-Nympha",
+    "race": "Human",
+    "gender": "Female",
+    "type_class": "Youngling",
+    "age": 14,
+    "height": 1.65,
+    "element": "Water",
+    "origin": "Canonia",
+    "weapon": "Harp",
+    "alignment": "Chaotic Neutral",
+    "alive": true,
+    "deleted_at": "2024-04-20T09:42:07.913076" 
+  }
+]
+```
+
+**GET: localhost:8080/api/character/search-trash?name=Sirene**
+```
+// Response
+[
+  {
+    "id": 5,
+    "name": "Elwyen Sirene Wu-Nympha",
+    "race": "Human",
+    "gender": "Female",
+    "type_class": "Youngling",
+    "age": 14,
+    "height": 1.61,
+    "element": "Water",
+    "origin": "Canonia",
+    "weapon": "Harp",
+    "alignment": "Chaotic Neutral",
+    "alive": true,
+    "deleted_at": "2024-04-20T09:42:07.913076"
+  }
+]
+```
+
+**GET: localhost:8080/api/restore-character-trash/id**
+```
+// Response
+Elwyen Sirene Wu-Nympha went restored.
+```
+
+**DELETE: localhost:8080/api/character-delete/id**
+```
+// Response
+Elwyen Sirene Wu-Nympha went deleted successfully.
+```
+
 ### Reference
 - **[Mardek](https://figverse.fandom.com/wiki/MARDEK_(Series))**

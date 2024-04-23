@@ -1,12 +1,13 @@
 package com.sb3.apirestsb3.Service;
 
-import com.sb3.apirestsb3.DAO.CharacterDAO;
-import com.sb3.apirestsb3.Model.CharacterModel;
+import com.sb3.apirestsb3.DAO.*;
+import com.sb3.apirestsb3.Entity.*;
 import jakarta.persistence.*;
-import org.springframework.stereotype.Service;
-import jakarta.transaction.Transactional;
+import org.springframework.stereotype.*;
+import jakarta.transaction.*;
 
-import java.util.List;
+import java.util.*;
+import java.time.*;
 
 @Service
 public class CharacterService implements CharacterDAO {
@@ -19,43 +20,80 @@ public class CharacterService implements CharacterDAO {
     }
 
     @Override
-    public List<CharacterModel> index() {
-        TypedQuery<CharacterModel> query = entityManager.createQuery("from CharacterModel", CharacterModel.class);
+    public List<CharacterEntity> index() {
+        TypedQuery<CharacterEntity> query = entityManager.createQuery("SELECT c FROM CharacterEntity c WHERE c.deleted_at IS NULL", CharacterEntity.class);
         return query.getResultList();
     }
 
     @Override
     @Transactional
-    public CharacterModel create(CharacterModel theCharacterModel) {
-        entityManager.persist(theCharacterModel);
-        return theCharacterModel;
+    public CharacterEntity create(CharacterEntity theCharacterEntity) {
+        entityManager.persist(theCharacterEntity);
+        return theCharacterEntity;
     }
 
     @Override
-    public CharacterModel read(int id) {
-        return entityManager.find(CharacterModel.class, id);
+    public CharacterEntity read(int id) {
+        return entityManager.find(CharacterEntity.class, id);
     }
 
     @Override
-    public List<CharacterModel> search(String name) {
-        String query_search = "SELECT c FROM CharacterModel c WHERE c.name LIKE :name";
-        TypedQuery<CharacterModel> query = entityManager.createQuery(query_search, CharacterModel.class);
+    public List<CharacterEntity> search(String name) {
+        String query_search = "SELECT c FROM CharacterEntity c WHERE c.name LIKE :name AND c.deleted_at IS NULL";
+        TypedQuery<CharacterEntity> query = entityManager.createQuery(query_search, CharacterEntity.class);
         query.setParameter("name", "%" + name + "%");
         return query.getResultList();
     }
 
     @Override
     @Transactional
-    public CharacterModel update(CharacterModel theCharacterModel) {
-        CharacterModel characterModel = entityManager.merge(theCharacterModel);
-        return characterModel;
+    public CharacterEntity update(CharacterEntity theCharacterEntity) {
+        CharacterEntity characterEntity = entityManager.merge(theCharacterEntity);
+        return characterEntity;
+    }
+
+    @Override
+    @Transactional
+    public void trash(int id) {
+        CharacterEntity characterEntity = entityManager.find(CharacterEntity.class, id);
+        if (characterEntity != null) {
+            characterEntity.setDeleted_at(LocalDateTime.now());
+            entityManager.merge(characterEntity);
+        }
+    }
+
+    @Override
+    public List<CharacterEntity> indexTrash() {
+        TypedQuery<CharacterEntity> query = entityManager.createQuery("SELECT c FROM CharacterEntity c WHERE c.deleted_at IS NOT NULL", CharacterEntity.class);
+        return query.getResultList();
+    }
+
+    @Override
+    public List<CharacterEntity> searchTrash(String name) {
+        String query_search = "SELECT c FROM CharacterEntity c WHERE c.name LIKE :name AND c.deleted_at IS NOT NULL";
+        TypedQuery<CharacterEntity> query = entityManager.createQuery(query_search, CharacterEntity.class);
+        query.setParameter("name", "%" + name + "%");
+        return query.getResultList();
+    }
+
+    @Override
+    @Transactional
+    public CharacterEntity restore(int id) {
+        CharacterEntity characterEntity = entityManager.find(CharacterEntity.class, id);
+        if (characterEntity != null) {
+            characterEntity.setDeleted_at(null);
+            entityManager.persist(characterEntity);
+        } else {
+            throw new IllegalArgumentException("Register ID " + id + " not found.");
+        }
+        return characterEntity;
     }
 
     @Override
     @Transactional
     public void delete(int id) {
-        CharacterModel characterModel = entityManager.find(CharacterModel.class,id);
-        entityManager.remove(characterModel);
+        CharacterEntity characterEntity = entityManager.find(CharacterEntity.class,id);
+        entityManager.remove(characterEntity);
     }
 
 }
