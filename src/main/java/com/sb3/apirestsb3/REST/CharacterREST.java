@@ -34,14 +34,6 @@ public class CharacterREST {
 
     @PostMapping("/character")
     public ResponseEntity<Object> create(@Valid @RequestBody CharacterEntity characterEntity, BindingResult bindingResult) {
-        characterEntity.setName(characterEntity.getName().trim());
-        characterEntity.setRace(characterEntity.getRace().trim());
-        characterEntity.setGender(characterEntity.getGender().trim());
-        characterEntity.setType_class(characterEntity.getType_class().trim());
-        characterEntity.setElement(characterEntity.getElement().trim());
-        characterEntity.setOrigin(characterEntity.getOrigin().trim());
-        characterEntity.setWeapon(characterEntity.getWeapon().trim());
-        characterEntity.setAlignment(characterEntity.getAlignment().trim());
         if (bindingResult.hasErrors()) {
             return handleValidationErrors(bindingResult);
         }
@@ -73,14 +65,6 @@ public class CharacterREST {
 
     @PutMapping("/character/{id}")
     public ResponseEntity<Object> update(@PathVariable int id, @Valid @RequestBody CharacterEntity characterEntity, BindingResult bindingResult) {
-        characterEntity.setName(characterEntity.getName().trim());
-        characterEntity.setRace(characterEntity.getRace().trim());
-        characterEntity.setGender(characterEntity.getGender().trim());
-        characterEntity.setType_class(characterEntity.getType_class().trim());
-        characterEntity.setElement(characterEntity.getElement().trim());
-        characterEntity.setOrigin(characterEntity.getOrigin().trim());
-        characterEntity.setWeapon(characterEntity.getWeapon().trim());
-        characterEntity.setAlignment(characterEntity.getAlignment().trim());
         if (bindingResult.hasErrors()) {
             return handleValidationErrors(bindingResult);
         }

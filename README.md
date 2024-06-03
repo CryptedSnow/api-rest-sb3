@@ -23,10 +23,19 @@ api-rest-sb3
 
 ### Application Structure
 
-* ```CharacterEntity.java```: Work with informations of database.
-* ```CharacterDAO.java```: Interface containing methods for data management.
-* ```CharacterService.java```: implementing methods defined in the interface.
-* ```CharacterREST.java```: HTTP CRUD (Create, Read, Update, Delete) methods to enable client-server communication.
+See more about **[Three-Tier Architecture](https://www.ibm.com/topics/three-tier-architecture)**.
+
+1 - Presentation Layer:
+* ```CharacterREST.java```: HTTP requests.
+
+2 - Business Layer:
+* ```CharacterService.java```: Logic of application methods.
+
+3 - Data Layer:
+* ```CharacterDAO.java```: Access the database.
+* ```CharacterEntity.java```: Represent the database informations.
+
+4 - Others files:
 * ```application.properties```: Application settings file.
 
 ## Database

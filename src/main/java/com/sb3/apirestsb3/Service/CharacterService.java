@@ -57,7 +57,7 @@ public class CharacterService implements CharacterDAO {
     public void trash(int id) {
         CharacterEntity characterEntity = entityManager.find(CharacterEntity.class, id);
         if (characterEntity != null) {
-            characterEntity.setDeleted_at(LocalDateTime.now());
+            characterEntity.setDeletedAt(LocalDateTime.now());
             entityManager.merge(characterEntity);
         }
     }
@@ -81,7 +81,7 @@ public class CharacterService implements CharacterDAO {
     public CharacterEntity restore(int id) {
         CharacterEntity characterEntity = entityManager.find(CharacterEntity.class, id);
         if (characterEntity != null) {
-            characterEntity.setDeleted_at(null);
+            characterEntity.setDeletedAt(null);
             entityManager.persist(characterEntity);
         } else {
             throw new IllegalArgumentException("Register ID " + id + " not found.");
