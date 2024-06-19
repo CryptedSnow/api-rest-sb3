@@ -1,4 +1,4 @@
-# API REST application
+# API REST application (map)
 
 ```
 api-rest-sb3
@@ -21,7 +21,7 @@ api-rest-sb3
         |__ application.properties
 ```
 
-### Application Structure
+### Application structure pattern
 
 See more about **[Three-Tier Architecture](https://www.ibm.com/topics/three-tier-architecture)**.
 
@@ -40,9 +40,9 @@ See more about **[Three-Tier Architecture](https://www.ibm.com/topics/three-tier
 
 ## Database
 
-You can use ```PostgreSQL``` or ```MySQL```, so follow the steps:
+You can use ```PostgreSQL``` or ```MySQL``` database, so follow the steps:
 
-1 - Go to ```application.properties``` and insert the lines
+1 - Go to ```application.properties``` and insert the lines (Check the database name, user and password of your preference)
 ```
 # PostgreSQL
 spring.datasource.url=jdbc:postgresql://localhost:5432/database-name
@@ -107,7 +107,7 @@ VALUES
 
 ## API REST Address 
 
-Go for some API Client tool to perform the API testing, use [POSTMAN](https://www.postman.com/) for example.
+Go for some API Client tool to perform the API testing, you can use [POSTMAN](https://www.postman.com/) for example.
 
 **GET: localhost:8080/api/character**
 ```
