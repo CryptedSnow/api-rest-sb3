@@ -1,4 +1,4 @@
-# API REST application (map)
+# Application (map)
 
 ```
 api-rest-sb3
@@ -21,17 +21,20 @@ api-rest-sb3
         |__ application.properties
 ```
 
+It is necessary install ```JDK```, the minimum version to perfomate Spring Boot 3 is **17** (I usually use **JDK 21** version).
+
 ### Application structure pattern
 
 See more about **[Three-Tier Architecture](https://www.ibm.com/topics/three-tier-architecture)**.
 
-1 - Presentation Layer:
-* ```CharacterREST.java```: HTTP requests.
+1 - Presentation tier:
+* Nothing interface files in this application.
 
-2 - Business Layer:
+2 - Application tier:
+* ```CharacterREST.java```: HTTP requests.
 * ```CharacterService.java```: Logic of application methods.
 
-3 - Data Layer:
+3 - Data tier:
 * ```CharacterDAO.java```: Access the database.
 * ```CharacterEntity.java```: Represent the database informations.
 
