@@ -128,7 +128,7 @@ public class CharacterREST {
         }
     }
 
-    @DeleteMapping("/character-delete/{id}")
+    @DeleteMapping("/delete-character/{id}")
     public ResponseEntity<Object> delete(@PathVariable int id) {
         CharacterEntity character = characterService.read(id);
         if (character != null) {

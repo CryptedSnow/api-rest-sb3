@@ -21,7 +21,7 @@ api-rest-sb3
         |__ application.properties
 ```
 
-It is necessary install ```JDK```, the minimum version to perfomate Spring Boot 3 is **17** (I usually use **JDK 21** version).
+It is necessary install ```JDK```, the minimum version to perfomate Spring Boot 3 is **17** (I usually use **JDK 21** version). Don't forget about to install ```Maven``` and ```Gradle``` also.
 
 ### Application structure pattern
 
@@ -31,11 +31,11 @@ See more about **[Three-Tier Architecture](https://www.ibm.com/topics/three-tier
 * Nothing interface files in this application.
 
 2 - Application tier:
-* ```CharacterREST.java```: HTTP requests.
-* ```CharacterService.java```: Logic of application methods.
+* ```CharacterREST.java```: HTTP requests (extends ```CharacterEntity, CharacterService``` class).
+* ```CharacterService.java```: Logic of application methods (extends ```CharacterDAO, CharacterEntity``` class).
 
 3 - Data tier:
-* ```CharacterDAO.java```: Access the database.
+* ```CharacterDAO.java```: Access the database (extends ```CharacterEntity``` class).
 * ```CharacterEntity.java```: Represent the database informations.
 
 4 - Others files:
@@ -114,7 +114,7 @@ Go for some API Client tool to perform the API testing, you can use [POSTMAN](ht
 
 **GET: localhost:8080/api/character**
 ```
-// Response
+// Response - Status: 200 OK
 [
   {
     "id": 1,
@@ -196,7 +196,7 @@ Go for some API Client tool to perform the API testing, you can use [POSTMAN](ht
   "alive": true
 }
 
-// Response
+// Response - Status: 201 Created
 {
   "id": 5,
   "name": "Elwyen Sirene Wu-Nympha",
@@ -216,7 +216,7 @@ Go for some API Client tool to perform the API testing, you can use [POSTMAN](ht
 
 **GET: localhost:8080/api/character/id**
 ```
-// Response
+// Response - Status: 200 OK
 {
   "id": 5,
   "name": "Elwyen Sirene Wu-Nympha",
@@ -236,7 +236,7 @@ Go for some API Client tool to perform the API testing, you can use [POSTMAN](ht
 
 **GET: localhost:8080/api/character/search?name=El-Enkidu**
 ```
-// Response
+// Response - Status: 200 OK
 [
   {
     "id": 1,
@@ -273,7 +273,7 @@ Go for some API Client tool to perform the API testing, you can use [POSTMAN](ht
   "alive": true
 }
 
-// Response
+// Response - Status: 200 OK
 {
   "id": 5,
   "name": "Elwyen Sirene Wu-Nympha",
@@ -293,13 +293,13 @@ Go for some API Client tool to perform the API testing, you can use [POSTMAN](ht
 
 **GET: localhost:8080/api/trash-character/id**
 ```
-// Response
+// Response - Status: 200 OK
 Elwyen Sirene Wu-Nympha is at trash.
 ```
 
 **GET: localhost:8080/api/character-trash**
 ```
-// Response
+// Response - Status: 200 OK
 [
   {
     "id": 5,
@@ -321,7 +321,7 @@ Elwyen Sirene Wu-Nympha is at trash.
 
 **GET: localhost:8080/api/character/search-trash?name=Sirene**
 ```
-// Response
+// Response - Status: 200 OK
 [
   {
     "id": 5,
@@ -343,13 +343,13 @@ Elwyen Sirene Wu-Nympha is at trash.
 
 **GET: localhost:8080/api/restore-character-trash/id**
 ```
-// Response
+// Response - Status: 200 OK
 Elwyen Sirene Wu-Nympha went restored.
 ```
 
-**DELETE: localhost:8080/api/character-delete/id**
+**DELETE: localhost:8080/api/delete-character/id**
 ```
-// Response
+// Response - Status: 200 OK
 Elwyen Sirene Wu-Nympha went deleted successfully.
 ```
 
