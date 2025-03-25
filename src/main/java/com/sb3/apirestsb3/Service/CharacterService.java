@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import org.springframework.stereotype.*;
 import jakarta.transaction.*;
 
+import java.lang.reflect.Field;
 import java.util.*;
 import java.time.*;
 
@@ -50,6 +51,37 @@ public class CharacterService implements CharacterDAO {
     public CharacterEntity update(CharacterEntity theCharacterEntity) {
         CharacterEntity characterEntity = entityManager.merge(theCharacterEntity);
         return characterEntity;
+    }
+
+    @Override
+    @Transactional
+    public CharacterEntity partialUpdate(int id, Map<String, Object> patchUpdate) {
+        CharacterEntity characterEntity = entityManager.find(CharacterEntity.class, id);
+        if (characterEntity == null) {
+            throw new IllegalArgumentException("Character ID " + id + " not found.");
+        }
+        patchUpdate.forEach((field, value) -> {
+            try {
+                Field declaredField = CharacterEntity.class.getDeclaredField(field);
+                declaredField.setAccessible(true);
+                declaredField.set(characterEntity, convertValue(value, declaredField.getType()));
+            } catch (NoSuchFieldException | IllegalAccessException e) {
+                throw new RuntimeException("Error updating field: " + field, e);
+            }
+        });
+        return entityManager.merge(characterEntity);
+    }
+
+    private Object convertValue(Object value, Class<?> targetType) {
+        if (targetType == Integer.class || targetType == int.class) {
+            return Integer.parseInt(value.toString());
+        } else if (targetType == Float.class || targetType == float.class) {
+            return Float.parseFloat(value.toString());
+        } else if (targetType == Boolean.class || targetType == boolean.class) {
+            return Boolean.parseBoolean(value.toString());
+        } else {
+            return value;
+        }
     }
 
     @Override

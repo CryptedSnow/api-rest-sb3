@@ -291,10 +291,35 @@ Go for some API Client tool to perform the API testing, you can use [POSTMAN](ht
 }
 ```
 
+**PATCH: localhost:8080/api/character/id**
+```
+// JSON Content
+{
+  "height": 1.65 // I changed 1.61 m to 1.65 m
+}
+
+// Response - Status: 200 OK
+{
+  "id": 5,
+  "name": "Elwyen Sirene Wu-Nympha",
+  "race": "Human",
+  "gender": "Female",
+  "type_class": "Youngling",
+  "age": 14,
+  "height": 1.65,
+  "element": "Water",
+  "origin": "Canonia",
+  "weapon": "Harp",
+  "alignment": "Chaotic Neutral",
+  "alive": true,
+  "deleted_at": null
+}
+```
+
 **GET: localhost:8080/api/trash-character/id**
 ```
 // Response - Status: 200 OK
-Elwyen Sirene Wu-Nympha is at trash.
+Elwyen Sirene Wu-Nympha is in the trash.
 ```
 
 **GET: localhost:8080/api/character-trash**

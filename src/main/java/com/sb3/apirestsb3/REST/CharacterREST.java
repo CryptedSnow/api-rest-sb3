@@ -78,6 +78,18 @@ public class CharacterREST {
         return ResponseEntity.ok(updatedCharacter);
     }
 
+    @PatchMapping("/character/{id}")
+    public ResponseEntity<Object> partialUpdate(@PathVariable int id, @RequestBody Map<String, Object> patchUpdate) {
+        try {
+            CharacterEntity updatedCharacter = characterService.partialUpdate(id, patchUpdate);
+            return ResponseEntity.ok(updatedCharacter);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid request.");
+        }
+    }
+
     @GetMapping("/trash-character/{id}")
     public ResponseEntity<Object> trash(@PathVariable int id) {
         CharacterEntity character = characterService.read(id);
