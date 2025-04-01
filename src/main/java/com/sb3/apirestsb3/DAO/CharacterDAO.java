@@ -1,6 +1,6 @@
 package com.sb3.apirestsb3.DAO;
 
-import com.sb3.apirestsb3.Entity.*;
+import com.sb3.apirestsb3.Entity.CharacterEntity;
 
 import java.util.List;
 import java.util.Map;

@@ -1,14 +1,16 @@
 package com.sb3.apirestsb3.Service;
 
-import com.sb3.apirestsb3.DAO.*;
-import com.sb3.apirestsb3.Entity.*;
-import jakarta.persistence.*;
-import org.springframework.stereotype.*;
-import jakarta.transaction.*;
-
+import com.sb3.apirestsb3.DAO.CharacterDAO;
+import com.sb3.apirestsb3.Entity.CharacterEntity;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.TypedQuery;
+import jakarta.transaction.Transactional;
+import org.springframework.stereotype.Service;
 import java.lang.reflect.Field;
-import java.util.*;
-import java.time.*;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class CharacterService implements CharacterDAO {
@@ -89,7 +91,7 @@ public class CharacterService implements CharacterDAO {
     public void trash(int id) {
         CharacterEntity characterEntity = entityManager.find(CharacterEntity.class, id);
         if (characterEntity != null) {
-            characterEntity.setDeletedAt(LocalDateTime.now());
+            characterEntity.setDeleted_at(LocalDateTime.now());
             entityManager.merge(characterEntity);
         }
     }
@@ -113,7 +115,7 @@ public class CharacterService implements CharacterDAO {
     public CharacterEntity restore(int id) {
         CharacterEntity characterEntity = entityManager.find(CharacterEntity.class, id);
         if (characterEntity != null) {
-            characterEntity.setDeletedAt(null);
+            characterEntity.setDeleted_at(null);
             entityManager.persist(characterEntity);
         } else {
             throw new IllegalArgumentException("Register ID " + id + " not found.");

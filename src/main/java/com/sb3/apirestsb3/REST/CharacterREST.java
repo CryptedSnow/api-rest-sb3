@@ -1,14 +1,17 @@
 package com.sb3.apirestsb3.REST;
 
-import com.sb3.apirestsb3.Entity.*;
-import com.sb3.apirestsb3.Service.*;
-import jakarta.validation.*;
-import org.springframework.beans.factory.annotation.*;
-import org.springframework.http.*;
-import org.springframework.validation.*;
+import com.sb3.apirestsb3.Entity.CharacterEntity;
+import com.sb3.apirestsb3.Service.CharacterService;
+import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @RequestMapping("/api")
 @RestController
