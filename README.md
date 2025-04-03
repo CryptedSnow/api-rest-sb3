@@ -108,7 +108,7 @@ VALUES
 ('Vehrn Juonour El-Ganobyi', 'Human', 'Male', 'Paladin', 25, 1.77, 'Light', 'Belfan', 'Sword', 'Lawful Good', true);
 ```
 
-## API REST Address 
+## API address (endpoints) 
 
 Go for some API Client tool to perform the API testing, you can use [POSTMAN](https://www.postman.com/) for example.
 
@@ -214,7 +214,7 @@ Go for some API Client tool to perform the API testing, you can use [POSTMAN](ht
 }
 ```
 
-**GET: localhost:8080/api/character/id**
+**GET: localhost:8080/api/character/5**
 ```
 // Response - Status: 200 OK
 {
@@ -234,29 +234,29 @@ Go for some API Client tool to perform the API testing, you can use [POSTMAN](ht
 }
 ```
 
-**GET: localhost:8080/api/character/search?name=El-Enkidu**
+**GET: localhost:8080/api/character/search?name=Sirene**
 ```
 // Response - Status: 200 OK
 [
   {
-    "id": 1,
-    "name": "Mardek Innanu El-Enkidu",
+    "id": 5,
+    "name": "Elwyen Sirene Wu-Nympha",
     "race": "Human",
-    "gender": "Male",
-    "type_class": "Recruit",
-    "age": 18,
-    "height": 1.78,
-    "element": "Light",
-    "origin": "Goznor",
-    "weapon": "Sword",
-    "alignment": "Lawful Good",
+    "gender": "Female",
+    "type_class": "Youngling",
+    "age": 14,
+    "height": 1.61,
+    "element": "Water",
+    "origin": "Canonia",
+    "weapon": "Harp",
+    "alignment": "Chaotic Neutral",
     "alive": true,
     "deleted_at": null
   }
 ]
 ```
 
-**PUT: localhost:8080/api/character/id**
+**PUT: localhost:8080/api/character/5**
 ```
 // JSON Content
 {
@@ -291,7 +291,7 @@ Go for some API Client tool to perform the API testing, you can use [POSTMAN](ht
 }
 ```
 
-**PATCH: localhost:8080/api/character/id**
+**PATCH: localhost:8080/api/character/5**
 ```
 // JSON Content
 {
@@ -316,7 +316,7 @@ Go for some API Client tool to perform the API testing, you can use [POSTMAN](ht
 }
 ```
 
-**GET: localhost:8080/api/trash-character/id**
+**GET: localhost:8080/api/trash-character/5**
 ```
 // Response - Status: 200 OK
 Elwyen Sirene Wu-Nympha is in the trash.
@@ -366,17 +366,17 @@ Elwyen Sirene Wu-Nympha is in the trash.
 ]
 ```
 
-**GET: localhost:8080/api/restore-character-trash/id**
+**GET: localhost:8080/api/restore-character-trash/5**
 ```
 // Response - Status: 200 OK
-Elwyen Sirene Wu-Nympha went restored.
+Elwyen Sirene Wu-Nympha was restored.
 ```
 
-**DELETE: localhost:8080/api/delete-character/id**
+**DELETE: localhost:8080/api/delete-character/5**
 ```
 // Response - Status: 200 OK
-Elwyen Sirene Wu-Nympha went deleted successfully.
+Elwyen Sirene Wu-Nympha was purged.
 ```
 
 ### Reference
-- **[Mardek](https://figverse.fandom.com/wiki/MARDEK_(Series))**
+- **[Mardek (Series)](https://figverse.fandom.com/wiki/MARDEK_(Series))**
