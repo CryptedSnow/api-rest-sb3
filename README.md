@@ -46,19 +46,52 @@ See more about **[Three-Tier Architecture](https://www.ibm.com/topics/three-tier
 You can use ```PostgreSQL``` or ```MySQL``` database, so follow the steps:
 
 1 - Go to ```application.properties``` and insert the lines (Check the database name, user and password of your preference)
-```
-# PostgreSQL
-spring.datasource.url=jdbc:postgresql://localhost:5432/database-name
-spring.datasource.username=postgres
-spring.datasource.password=
-spring.datasource.driver-class-name=org.postgresql.Driver
 
+```
 # MySQL
 spring.datasource.mysql.url=jdbc:mysql://localhost:3306/database-name
 spring.datasource.mysql.username=root
 spring.datasource.mysql.password=
 spring.datasource.mysql.driver-class-name=com.mysql.cj.jdbc.Driver
+
+# PostgreSQL
+spring.datasource.url=jdbc:postgresql://localhost:5432/database-name
+spring.datasource.username=postgres
+spring.datasource.password=
+spring.datasource.driver-class-name=org.postgresql.Driver
 ```
+
+If you want use Docker insert the lines:
+
+```
+# MySQL
+spring.datasource.mysql.url=jdbc:mysql://localhost:3306/api-rest-sb3
+spring.datasource.mysql.username=user
+spring.datasource.mysql.password=password
+spring.datasource.mysql.driver-class-name=com.mysql.cj.jdbc.Driver
+
+# PostgreSQL
+spring.datasource.url=jdbc:postgresql://localhost:5432/api-rest-sb3
+spring.datasource.username=user
+spring.datasource.password=password
+spring.datasource.driver-class-name=org.postgresql.Driver
+```
+
+### Panels
+
+- phpMyAdmin: http://localhost:8081
+    - User: ```user```
+    - Password: ```password```
+- pgAdmin: http://localhost:8082
+    - User: ```admin@admin.com```
+    - Password: ```admin```
+
+To create a server to pgAdmin:
+- Host name/address: ```postgres```
+- Port: ```5432```
+- Maintenance database:	```postgres```
+- Username:	```user```
+- Password:	```password```
 
 2 - Create a database with the name that you desire (it needs be the same configured in ```application.properties```)
 
