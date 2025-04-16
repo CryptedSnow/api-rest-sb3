@@ -21,7 +21,7 @@ api-rest-sb3
         |__ application.properties
 ```
 
-It is necessary install ```JDK```, the minimum version to perfomate Spring Boot 3 is **17** (I usually use **JDK 21** version). Don't forget about to install ```Maven``` and ```Gradle``` also.
+It is necessary install ```JDK```, the minimum version to perfomate Spring Boot 3 is **17** (I usually use **JDK 21** version). Don't forget about to use [IntelliJ IDEA](https://www.jetbrains.com/idea/) to facilitate your experience.
 
 ### Application structure pattern
 
@@ -61,7 +61,7 @@ spring.datasource.password=
 spring.datasource.driver-class-name=org.postgresql.Driver
 ```
 
-If you want use Docker insert the lines:
+If you want use ```Docker``` to insert the lines:
 
 ```
 # MySQL
@@ -93,9 +93,7 @@ To create a server to pgAdmin:
 - Username:	```user```
 - Password:	```password```
 
-2 - Create a database with the name that you desire (it needs be the same configured in ```application.properties```)
-
-3 - Create a table called ```characters``` (the table name is configured in ```CharacterEntity.java```), then insert this code snippet to speed up the process.
+2 - Create a table called ```characters``` (the table name is configured in ```CharacterEntity.java```), then insert this code snippet to speed up the process.
 
 ```
 -- PostgreSQL
@@ -141,9 +139,9 @@ VALUES
 ('Vehrn Juonour El-Ganobyi', 'Human', 'Male', 'Paladin', 25, 1.77, 'Light', 'Belfan', 'Sword', 'Lawful Good', true);
 ```
 
-## API address (endpoints) 
+## REST API endpoints 
 
-Go for some API Client tool to perform the API testing, you can use [POSTMAN](https://www.postman.com/) for example.
+you need use some API platform to perfomate the endpoints, you can use [POSTMAN](https://www.postman.com/) for example.
 
 **GET: localhost:8080/api/character**
 ```
@@ -214,7 +212,7 @@ Go for some API Client tool to perform the API testing, you can use [POSTMAN](ht
 
 **POST: localhost:8080/api/character**
 ```
-// JSON Content
+// JSON body
 {
   "name": "Elwyen Sirene Wu-Nympha",
   "race": "Human",
@@ -228,7 +226,9 @@ Go for some API Client tool to perform the API testing, you can use [POSTMAN](ht
   "alignment": "Chaotic Neutral",
   "alive": true
 }
+```
 
+```
 // Response - Status: 201 Created
 {
   "id": 5,
@@ -247,7 +247,8 @@ Go for some API Client tool to perform the API testing, you can use [POSTMAN](ht
 }
 ```
 
-**GET: localhost:8080/api/character/5**
+**GET: localhost:8080/api/character/id**
+- You need change **id** for **5**.
 ```
 // Response - Status: 200 OK
 {
@@ -268,6 +269,7 @@ Go for some API Client tool to perform the API testing, you can use [POSTMAN](ht
 ```
 
 **GET: localhost:8080/api/character/search?name=Sirene**
+- You need change **name=** for **name=Sirene**
 ```
 // Response - Status: 200 OK
 [
@@ -289,9 +291,10 @@ Go for some API Client tool to perform the API testing, you can use [POSTMAN](ht
 ]
 ```
 
-**PUT: localhost:8080/api/character/5**
+**PUT: localhost:8080/api/character/id**
+- You need change **id** for **5**.
 ```
-// JSON Content
+// JSON body
 {
   "name": "Elwyen Sirene Wu-Nympha",
   "race": "Human",
@@ -305,7 +308,9 @@ Go for some API Client tool to perform the API testing, you can use [POSTMAN](ht
   "alignment": "Chaotic Neutral",
   "alive": true
 }
+```
 
+```
 // Response - Status: 200 OK
 {
   "id": 5,
@@ -325,12 +330,15 @@ Go for some API Client tool to perform the API testing, you can use [POSTMAN](ht
 ```
 
 **PATCH: localhost:8080/api/character/5**
+- You need change **id** for **5**.
 ```
-// JSON Content
+// JSON body
 {
   "height": 1.65 // I changed 1.61 m to 1.65 m
 }
+```
 
+```
 // Response - Status: 200 OK
 {
   "id": 5,
@@ -349,7 +357,8 @@ Go for some API Client tool to perform the API testing, you can use [POSTMAN](ht
 }
 ```
 
-**GET: localhost:8080/api/trash-character/5**
+**GET: localhost:8080/api/trash-character/id**
+- You need change **id** for **5**.
 ```
 // Response - Status: 200 OK
 Elwyen Sirene Wu-Nympha is in the trash.
@@ -378,6 +387,7 @@ Elwyen Sirene Wu-Nympha is in the trash.
 ```
 
 **GET: localhost:8080/api/character/search-trash?name=Sirene**
+- You need change **name=** for **name=Sirene**
 ```
 // Response - Status: 200 OK
 [
@@ -399,13 +409,15 @@ Elwyen Sirene Wu-Nympha is in the trash.
 ]
 ```
 
-**GET: localhost:8080/api/restore-character-trash/5**
+**GET: localhost:8080/api/restore-character-trash/id**
+- You need change **id** for **5**.
 ```
 // Response - Status: 200 OK
 Elwyen Sirene Wu-Nympha was restored.
 ```
 
-**DELETE: localhost:8080/api/delete-character/5**
+**DELETE: localhost:8080/api/delete-character/id**
+- You need change **id** for **5**.
 ```
 // Response - Status: 200 OK
 Elwyen Sirene Wu-Nympha was purged.
