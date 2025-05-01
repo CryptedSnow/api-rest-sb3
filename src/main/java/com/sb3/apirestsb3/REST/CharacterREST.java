@@ -135,7 +135,7 @@ public class CharacterREST {
         if (character != null) {
             String name = character.getName();
             characterService.restore(id);
-            String message = name + " was restored.";
+            String message = name + " is restored.";
             return new ResponseEntity<>(message, HttpStatus.OK);
         } else {
             String message = "ID " + id + " not found to restore.";
@@ -149,7 +149,7 @@ public class CharacterREST {
         if (character != null) {
             String name = character.getName();
             characterService.delete(id);
-            String message = name + " was deleted successfully.";
+            String message = name + " is purged.";
             return new ResponseEntity<>(message, HttpStatus.OK);
         } else {
             String message = "ID " + id + " not found to exclusion.";

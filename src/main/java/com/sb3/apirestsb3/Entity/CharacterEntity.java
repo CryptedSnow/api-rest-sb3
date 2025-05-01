@@ -1,5 +1,7 @@
 package com.sb3.apirestsb3.Entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
@@ -67,6 +69,8 @@ public class CharacterEntity {
     @Column(name="alive")
     private Boolean alive;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
     @Column(name = "deleted_at")
     private LocalDateTime deleted_at;
 

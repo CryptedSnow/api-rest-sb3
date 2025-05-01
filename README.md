@@ -159,8 +159,7 @@ you need use some API platform to perfomate the endpoints, you can use [POSTMAN]
     "origin": "Goznor",
     "weapon": "Sword",
     "alignment": "Lawful Good",
-    "alive": true,
-    "deleted_at": null
+    "alive": true
   },
   {
     "id": 2,
@@ -174,8 +173,7 @@ you need use some API platform to perfomate the endpoints, you can use [POSTMAN]
     "origin": "Goznor",
     "weapon": "Greatsword",
     "alignment": "Neutral Good",
-    "alive": true,
-    "deleted_at": null
+    "alive": true
   },
   {
     "id": 3,
@@ -189,8 +187,7 @@ you need use some API platform to perfomate the endpoints, you can use [POSTMAN]
     "origin": "Water Temple",
     "weapon": "Rod",
     "alignment": "Lawful Neutral",
-    "alive": true,
-    "deleted_at": null
+    "alive": true
   },
   {
     "id": 4,
@@ -204,8 +201,7 @@ you need use some API platform to perfomate the endpoints, you can use [POSTMAN]
     "origin": "Belfan",
     "weapon": "Sword",
     "alignment": "Lawful Good",
-    "alive": true,
-    "deleted_at": null
+    "alive": true
   }
 ]
 ```
@@ -223,8 +219,7 @@ you need use some API platform to perfomate the endpoints, you can use [POSTMAN]
   "element": "Water",
   "origin": "Canonia",
   "weapon": "Harp",
-  "alignment": "Chaotic Neutral",
-  "alive": true
+  "alignment": "Chaotic Neutral"
 }
 ```
 
@@ -242,8 +237,7 @@ you need use some API platform to perfomate the endpoints, you can use [POSTMAN]
   "origin": "Canonia",
   "weapon": "Harp",
   "alignment": "Chaotic Neutral",
-  "alive": true,
-  "deleted_at": null
+  "alive": true
 }
 ```
 
@@ -263,8 +257,7 @@ you need use some API platform to perfomate the endpoints, you can use [POSTMAN]
   "origin": "Canonia",
   "weapon": "Harp",
   "alignment": "Chaotic Neutral",
-  "alive": true,
-  "deleted_at": null
+  "alive": true
 }
 ```
 
@@ -285,8 +278,7 @@ you need use some API platform to perfomate the endpoints, you can use [POSTMAN]
     "origin": "Canonia",
     "weapon": "Harp",
     "alignment": "Chaotic Neutral",
-    "alive": true,
-    "deleted_at": null
+    "alive": true
   }
 ]
 ```
@@ -324,8 +316,7 @@ you need use some API platform to perfomate the endpoints, you can use [POSTMAN]
   "origin": "Canonia",
   "weapon": "Harp",
   "alignment": "Chaotic Neutral",
-  "alive": true,
-  "deleted_at": null
+  "alive": true
 }
 ```
 
@@ -352,8 +343,7 @@ you need use some API platform to perfomate the endpoints, you can use [POSTMAN]
   "origin": "Canonia",
   "weapon": "Harp",
   "alignment": "Chaotic Neutral",
-  "alive": true,
-  "deleted_at": null
+  "alive": true
 }
 ```
 
@@ -361,7 +351,7 @@ you need use some API platform to perfomate the endpoints, you can use [POSTMAN]
 - You need change **id** for **5**.
 ```
 // Response - Status: 200 OK
-Elwyen Sirene Wu-Nympha is in the trash.
+Elwyen Sirene Wu-Nympha is at trash.
 ```
 
 **GET: localhost:8080/api/character-trash**
@@ -381,7 +371,7 @@ Elwyen Sirene Wu-Nympha is in the trash.
     "weapon": "Harp",
     "alignment": "Chaotic Neutral",
     "alive": true,
-    "deleted_at": "2024-04-20T09:42:07.913076" 
+    "deleted_at": "20-04-2024 08:30:00" 
   }
 ]
 ```
@@ -404,7 +394,7 @@ Elwyen Sirene Wu-Nympha is in the trash.
     "weapon": "Harp",
     "alignment": "Chaotic Neutral",
     "alive": true,
-    "deleted_at": "2024-04-20T09:42:07.913076"
+    "deleted_at": "20-04-2024 08:30:00" 
   }
 ]
 ```
@@ -413,14 +403,14 @@ Elwyen Sirene Wu-Nympha is in the trash.
 - You need change **id** for **5**.
 ```
 // Response - Status: 200 OK
-Elwyen Sirene Wu-Nympha was restored.
+Elwyen Sirene Wu-Nympha is restored.
 ```
 
 **DELETE: localhost:8080/api/delete-character/id**
 - You need change **id** for **5**.
 ```
 // Response - Status: 200 OK
-Elwyen Sirene Wu-Nympha was purged.
+Elwyen Sirene Wu-Nympha is purged.
 ```
 
 ### Reference
