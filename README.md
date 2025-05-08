@@ -49,13 +49,13 @@ You can use ```PostgreSQL``` or ```MySQL``` database, so follow the steps:
 
 ```
 # MySQL
-spring.datasource.mysql.url=jdbc:mysql://localhost:3306/database-name
-spring.datasource.mysql.username=root
-spring.datasource.mysql.password=
-spring.datasource.mysql.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.datasource.url=jdbc:mysql://localhost:3306/database_name
+spring.datasource.username=root
+spring.datasource.password=
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 
 # PostgreSQL
-spring.datasource.url=jdbc:postgresql://localhost:5432/database-name
+spring.datasource.url=jdbc:postgresql://localhost:5432/database_name
 spring.datasource.username=postgres
 spring.datasource.password=
 spring.datasource.driver-class-name=org.postgresql.Driver
@@ -65,10 +65,10 @@ If you want use ```Docker``` to insert the lines:
 
 ```
 # MySQL
-spring.datasource.mysql.url=jdbc:mysql://localhost:3306/api-rest-sb3
-spring.datasource.mysql.username=user
-spring.datasource.mysql.password=password
-spring.datasource.mysql.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.datasource.url=jdbc:mysql://localhost:3306/api-rest-sb3
+spring.datasource.username=user
+spring.datasource.password=password
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 
 # PostgreSQL
 spring.datasource.url=jdbc:postgresql://localhost:5432/api-rest-sb3
@@ -87,7 +87,7 @@ spring.datasource.driver-class-name=org.postgresql.Driver
     - Password: ```admin```
 
 To create a server to pgAdmin:
-- Host name/address: ```postgres```
+- Host name/address: ```pgsql```
 - Port: ```5432```
 - Maintenance database:	```postgres```
 - Username:	```user```
@@ -96,9 +96,9 @@ To create a server to pgAdmin:
 2 - Create a table called ```characters``` (the table name is configured in ```CharacterEntity.java```), then insert this code snippet to speed up the process.
 
 ```
--- PostgreSQL
+-- MySQL
 CREATE TABLE characters (
-    id SERIAL PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(50) NOT NULL,
     race VARCHAR(15) NOT NULL,
     gender VARCHAR(15) NOT NULL,
@@ -113,9 +113,9 @@ CREATE TABLE characters (
     deleted_at TIMESTAMP
 );
 
--- MySQL
+-- PostgreSQL
 CREATE TABLE characters (
-    id INT PRIMARY KEY AUTO_INCREMENT,
+    id SERIAL PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
     race VARCHAR(15) NOT NULL,
     gender VARCHAR(15) NOT NULL,
