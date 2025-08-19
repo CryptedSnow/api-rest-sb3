@@ -65,13 +65,13 @@ If you want use ```Docker``` to insert the lines:
 
 ```
 # MySQL
-spring.datasource.url=jdbc:mysql://localhost:3306/api-rest-sb3
+spring.datasource.url=jdbc:mysql://mysql:3306/api-rest-sb3
 spring.datasource.username=user
 spring.datasource.password=password
 spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 
 # PostgreSQL
-spring.datasource.url=jdbc:postgresql://localhost:5432/api-rest-sb3
+spring.datasource.url=jdbc:postgresql://pgsql:5432/api-rest-sb3
 spring.datasource.username=user
 spring.datasource.password=password
 spring.datasource.driver-class-name=org.postgresql.Driver
@@ -219,7 +219,8 @@ you need use some API platform to perfomate the endpoints, you can use [POSTMAN]
   "element": "Water",
   "origin": "Canonia",
   "weapon": "Harp",
-  "alignment": "Chaotic Neutral"
+  "alignment": "Chaotic Neutral",
+  "alive": true
 }
 ```
 
