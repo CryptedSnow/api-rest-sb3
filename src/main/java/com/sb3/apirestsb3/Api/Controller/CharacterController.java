@@ -2,7 +2,6 @@ package com.sb3.apirestsb3.Api.Controller;
 
 import com.sb3.apirestsb3.Entity.Character;
 import com.sb3.apirestsb3.Service.CharacterService;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -78,14 +77,14 @@ public class CharacterController {
         }
         character.setId(id);
         Character updatedCharacter = characterService.updateCharacter(character);
-        return ResponseEntity.ok(updatedCharacter);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(updatedCharacter);
     }
 
     @PatchMapping("/character/{id}")
     public ResponseEntity<Object> partialUpdate(@PathVariable int id, @RequestBody Map<String, Object> patchUpdate) {
         try {
             Character updatedCharacter = characterService.updateCharacterPartially(id, patchUpdate);
-            return ResponseEntity.ok(updatedCharacter);
+            return ResponseEntity.status(HttpStatus.ACCEPTED).body(updatedCharacter);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         } catch (Exception e) {

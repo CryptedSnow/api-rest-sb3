@@ -304,7 +304,7 @@ you need use some API platform to perfomate the endpoints, you can use [POSTMAN]
 ```
 
 ```
-// Response - Status: 200 OK
+// Response - Status: 202 Accepted
 {
   "id": 5,
   "name": "Elwyen Sirene Wu-Nympha",
@@ -331,7 +331,7 @@ you need use some API platform to perfomate the endpoints, you can use [POSTMAN]
 ```
 
 ```
-// Response - Status: 200 OK
+// Response - Status: 202 Accepted
 {
   "id": 5,
   "name": "Elwyen Sirene Wu-Nympha",
