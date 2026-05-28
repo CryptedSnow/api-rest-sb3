@@ -6,14 +6,14 @@ api-rest-sb3
     |__ main
     |    |__ java
     |        |__ com.sb3.apirestsb3
+    |            |__ Api
+    |            |   |__ Controller
+    |            |       |__ CharacterController.java
     |            |__ DAO
     |            |   |__ CharacterDAO.java
     |            |
     |            |__ Entity
-    |            |   |__ CharacterEntity.java
-    |            |
-    |            |__ REST
-    |            |   |__ CharacterREST.java
+    |            |   |__ Character.java
     |            |
     |            |__ Service
     |                |__ CharacterService.java
@@ -31,12 +31,12 @@ See more about **[Three-Tier Architecture](https://www.ibm.com/topics/three-tier
 * Nothing interface files in this application.
 
 2 - Application tier:
-* ```CharacterREST.java```: HTTP requests (extends ```CharacterEntity, CharacterService``` class).
-* ```CharacterService.java```: Logic of application methods (extends ```CharacterDAO, CharacterEntity``` class).
+* ```CharacterController.java```: HTTP requests.
+* ```CharacterService.java```: Logic of application methods.
 
 3 - Data tier:
-* ```CharacterDAO.java```: Access the database (extends ```CharacterEntity``` class).
-* ```CharacterEntity.java```: Represent the database informations.
+* ```CharacterDAO.java```: Access the database.
+* ```Character.java```: Represent the database informations.
 
 4 - Others files:
 * ```application.properties```: Application settings file.
@@ -139,11 +139,11 @@ VALUES
 ('Vehrn Juonour El-Ganobyi', 'Human', 'Male', 'Paladin', 25, 1.77, 'Light', 'Belfan', 'Sword', 'Lawful Good', true);
 ```
 
-## REST API endpoints 
+## API REST endpoints 
 
 you need use some API platform to perfomate the endpoints, you can use [POSTMAN](https://www.postman.com/) for example.
 
-**GET: localhost:8080/api/character**
+**GET: localhost:8080/api/characters**
 ```
 // Response - Status: 200 OK
 [
@@ -152,7 +152,7 @@ you need use some API platform to perfomate the endpoints, you can use [POSTMAN]
     "name": "Mardek Innanu El-Enkidu",
     "race": "Human",
     "gender": "Male",
-    "type_class": "Recruit",
+    "typeClass": "Recruit",
     "age": 18,
     "height": 1.78,
     "element": "Light",
@@ -166,7 +166,7 @@ you need use some API platform to perfomate the endpoints, you can use [POSTMAN]
     "name": "Deugan Selmae Eh-Deredu",
     "race": "Human",
     "gender": "Male",
-    "type_class": "Recruit",
+    "typeClass": "Recruit",
     "age": 18,
     "height": 1.77,
     "element": "Earth",
@@ -180,7 +180,7 @@ you need use some API platform to perfomate the endpoints, you can use [POSTMAN]
     "name": "Emela Andra Wu-Jardu",
     "race": "Human",
     "gender": "Female",
-    "type_class": "Elemance",
+    "typeClass": "Elemance",
     "age": 18,
     "height": 1.75,
     "element": "Water",
@@ -194,7 +194,7 @@ you need use some API platform to perfomate the endpoints, you can use [POSTMAN]
     "name": "Vehrn Juonour El-Ganobyi",
     "race": "Human",
     "gender": "Male",
-    "type_class": "Paladin",
+    "typeClass": "Paladin",
     "age": 25,
     "height": 1.77,
     "element": "Light",
@@ -213,7 +213,7 @@ you need use some API platform to perfomate the endpoints, you can use [POSTMAN]
   "name": "Elwyen Sirene Wu-Nympha",
   "race": "Human",
   "gender": "Female",
-  "type_class": "Youngling",
+  "typeClass": "Youngling",
   "age": 14,
   "height": 1.61,
   "element": "Water",
@@ -231,7 +231,7 @@ you need use some API platform to perfomate the endpoints, you can use [POSTMAN]
   "name": "Elwyen Sirene Wu-Nympha",
   "race": "Human",
   "gender": "Female",
-  "type_class": "Youngling",
+  "typeClass": "Youngling",
   "age": 14,
   "height": 1.61,
   "element": "Water",
@@ -251,7 +251,7 @@ you need use some API platform to perfomate the endpoints, you can use [POSTMAN]
   "name": "Elwyen Sirene Wu-Nympha",
   "race": "Human",
   "gender": "Female",
-  "type_class": "Youngling",
+  "typeClass": "Youngling",
   "age": 14,
   "height": 1.61,
   "element": "Water",
@@ -262,7 +262,7 @@ you need use some API platform to perfomate the endpoints, you can use [POSTMAN]
 }
 ```
 
-**GET: localhost:8080/api/character/search?name=Sirene**
+**GET: localhost:8080/api/character/search-character?name=**
 - You need change **name=** for **name=Sirene**
 ```
 // Response - Status: 200 OK
@@ -272,7 +272,7 @@ you need use some API platform to perfomate the endpoints, you can use [POSTMAN]
     "name": "Elwyen Sirene Wu-Nympha",
     "race": "Human",
     "gender": "Female",
-    "type_class": "Youngling",
+    "typeClass": "Youngling",
     "age": 14,
     "height": 1.61,
     "element": "Water",
@@ -292,7 +292,7 @@ you need use some API platform to perfomate the endpoints, you can use [POSTMAN]
   "name": "Elwyen Sirene Wu-Nympha",
   "race": "Human",
   "gender": "Female",
-  "type_class": "Youngling",
+  "typeClass": "Youngling",
   "age": 14,
   "height": 1.65, // I changed 1.61 m to 1.65 m
   "element": "Water",
@@ -310,7 +310,7 @@ you need use some API platform to perfomate the endpoints, you can use [POSTMAN]
   "name": "Elwyen Sirene Wu-Nympha",
   "race": "Human",
   "gender": "Female",
-  "type_class": "Youngling",
+  "typeClass": "Youngling",
   "age": 14,
   "height": 1.65,
   "element": "Water",
@@ -321,7 +321,7 @@ you need use some API platform to perfomate the endpoints, you can use [POSTMAN]
 }
 ```
 
-**PATCH: localhost:8080/api/character/5**
+**PATCH: localhost:8080/api/character/id**
 - You need change **id** for **5**.
 ```
 // JSON body
@@ -337,7 +337,7 @@ you need use some API platform to perfomate the endpoints, you can use [POSTMAN]
   "name": "Elwyen Sirene Wu-Nympha",
   "race": "Human",
   "gender": "Female",
-  "type_class": "Youngling",
+  "typeClass": "Youngling",
   "age": 14,
   "height": 1.65,
   "element": "Water",
@@ -348,70 +348,11 @@ you need use some API platform to perfomate the endpoints, you can use [POSTMAN]
 }
 ```
 
-**GET: localhost:8080/api/trash-character/id**
+**DELETE: localhost:8080/api/character/id**
 - You need change **id** for **5**.
 ```
 // Response - Status: 200 OK
-Elwyen Sirene Wu-Nympha is at trash.
-```
-
-**GET: localhost:8080/api/character-trash**
-```
-// Response - Status: 200 OK
-[
-  {
-    "id": 5,
-    "name": "Elwyen Sirene Wu-Nympha",
-    "race": "Human",
-    "gender": "Female",
-    "type_class": "Youngling",
-    "age": 14,
-    "height": 1.65,
-    "element": "Water",
-    "origin": "Canonia",
-    "weapon": "Harp",
-    "alignment": "Chaotic Neutral",
-    "alive": true,
-    "deleted_at": "20-04-2024 08:30:00" 
-  }
-]
-```
-
-**GET: localhost:8080/api/character/search-trash?name=Sirene**
-- You need change **name=** for **name=Sirene**
-```
-// Response - Status: 200 OK
-[
-  {
-    "id": 5,
-    "name": "Elwyen Sirene Wu-Nympha",
-    "race": "Human",
-    "gender": "Female",
-    "type_class": "Youngling",
-    "age": 14,
-    "height": 1.61,
-    "element": "Water",
-    "origin": "Canonia",
-    "weapon": "Harp",
-    "alignment": "Chaotic Neutral",
-    "alive": true,
-    "deleted_at": "20-04-2024 08:30:00" 
-  }
-]
-```
-
-**GET: localhost:8080/api/restore-character-trash/id**
-- You need change **id** for **5**.
-```
-// Response - Status: 200 OK
-Elwyen Sirene Wu-Nympha is restored.
-```
-
-**DELETE: localhost:8080/api/delete-character/id**
-- You need change **id** for **5**.
-```
-// Response - Status: 200 OK
-Elwyen Sirene Wu-Nympha is purged.
+Elwyen Sirene Wu-Nympha is deleted.
 ```
 
 ### Reference

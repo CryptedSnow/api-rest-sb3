@@ -1,15 +1,11 @@
 package com.sb3.apirestsb3.Entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
-import java.time.LocalDateTime;
-
 @Entity
 @Table(name="characters")
-public class CharacterEntity {
+public class Character {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,9 +26,9 @@ public class CharacterEntity {
     @Column(name="gender")
     private String gender;
 
-    @NotBlank(message = "Class is required.")
+    @NotBlank(message = "Class type is required.")
     @Column(name="type_class")
-    private String type_class;
+    private String typeClass;
 
     @NotNull(message = "Age is required.")
     @Min(value = 14, message = "Age must has min 14 years old.")
@@ -69,21 +65,16 @@ public class CharacterEntity {
     @Column(name="alive")
     private Boolean alive;
 
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
-    @Column(name = "deleted_at")
-    private LocalDateTime deleted_at;
-
-    public CharacterEntity() {
+    public Character() {
 
     }
 
-    public CharacterEntity(int id, String name, String race, String gender, String type_class, Integer age, Float height, String element, String origin, String weapon, String alignment, Boolean alive, LocalDateTime deleted_at) {
+    public Character(int id, String name, String race, String gender, String typeClass, Integer age, Float height, String element, String origin, String weapon, String alignment, Boolean alive) {
         this.id = id;
         this.name = name;
         this.race = race;
         this.gender = gender;
-        this.type_class = type_class;
+        this.typeClass = typeClass;
         this.age = age;
         this.height = height;
         this.element = element;
@@ -91,7 +82,6 @@ public class CharacterEntity {
         this.weapon = weapon;
         this.alignment = alignment;
         this.alive = alive;
-        this.deleted_at = deleted_at;
     }
 
     public int getId() {
@@ -126,12 +116,12 @@ public class CharacterEntity {
         this.gender = gender;
     }
 
-    public String getType_class() {
-        return type_class;
+    public String getTypeClass() {
+        return typeClass;
     }
 
-    public void setType_class(String type_class) {
-        this.type_class = type_class;
+    public void setTypeClass(String typeClass) {
+        this.typeClass = typeClass;
     }
 
     public Integer getAge() {
@@ -188,13 +178,5 @@ public class CharacterEntity {
 
     public void setAlive(Boolean alive) {
         this.alive = alive;
-    }
-
-    public LocalDateTime getDeleted_at() {
-        return deleted_at;
-    }
-
-    public void setDeleted_at(LocalDateTime deleted_at) {
-        this.deleted_at = deleted_at;
     }
 }

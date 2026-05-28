@@ -2,8 +2,10 @@ package com.sb3.apirestsb3;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
+@ComponentScan(basePackages = "com.sb3.apirestsb3")
 public class ApiRestSb3Application {
 
 	public static void main(String[] args) {
