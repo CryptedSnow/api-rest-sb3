@@ -25,18 +25,17 @@ public class CharacterController {
     }
 
     @GetMapping("/characters")
-    public ResponseEntity<Object> index() {
+    public ResponseEntity<?> index() {
         List<Character> characters = characterService.indexCharacters();
         if (characters.isEmpty()) {
             String message = "No characters found.";
             return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
-        } else {
-            return ResponseEntity.ok(characters);
         }
+        return ResponseEntity.ok(characters);
     }
 
     @PostMapping("/character")
-    public ResponseEntity<Object> create(@Valid @RequestBody Character character, BindingResult bindingResult) {
+    public ResponseEntity<?> create(@Valid @RequestBody Character character, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return handleValidationErrors(bindingResult);
         }
@@ -45,33 +44,32 @@ public class CharacterController {
     }
 
     @GetMapping("/character/search-character")
-    public ResponseEntity<Object> searchCharacter(@RequestParam String name) {
+    public ResponseEntity<?> searchCharacter(@RequestParam String name) {
         List<Character> characters = characterService.searchCharacter(name);
         if (characters.isEmpty()) {
             String message = "Character " + name + " not found.";
             return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
-        } else {
-            return ResponseEntity.ok(characters);
         }
+        return ResponseEntity.ok(characters);
     }
 
     @GetMapping("/character/{id}")
-    public ResponseEntity<Object> findId(@PathVariable int id) {
-        Character character = characterService.findCharacterId(id);
-        if (character != null) {
+    public ResponseEntity<?> findId(@PathVariable int id) {
+        try {
+            Character character = characterService.findCharacterId(id);
             return ResponseEntity.ok(character);
-        } else {
+        } catch (RuntimeException e) {
             String message = "Character ID " + id + " not found.";
             return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
         }
     }
 
     @PutMapping("/character/{id}")
-    public ResponseEntity<Object> update(@PathVariable int id, @Valid @RequestBody Character character, BindingResult bindingResult) {
-        Character existingCharacter = characterService.findCharacterId(id);
-        if (existingCharacter == null) {
-            String message = "Character ID " + id + " not found.";
-            return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+    public ResponseEntity<?> update(@PathVariable int id, @Valid @RequestBody Character character, BindingResult bindingResult) {
+        try {
+            characterService.findCharacterId(id);
+        } catch (RuntimeException e) {
+            return new ResponseEntity<>("Character ID " + id + " not found.", HttpStatus.NOT_FOUND);
         }
         if (bindingResult.hasErrors()) {
             return handleValidationErrors(bindingResult);
@@ -82,28 +80,29 @@ public class CharacterController {
     }
 
     @PatchMapping("/character/{id}")
-    public ResponseEntity<Object> partialUpdate(@PathVariable int id, @Valid @RequestBody Map<String, Object> patchUpdate) {
+    public ResponseEntity<?> partialUpdate(@PathVariable int id, @RequestBody Map<String, Object> patchUpdate) {
         try {
             Character updatedCharacter = characterService.updateCharacterPartially(id, patchUpdate);
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(updatedCharacter);
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid request.");
+        } catch (RuntimeException e) {
+            String message = e.getMessage();
+            if (message.contains("not found")) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(message);
+            }
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid request: " + message);
         }
     }
 
     @DeleteMapping("/character/{id}")
-    public ResponseEntity<Object> delete(@PathVariable int id) {
-        Character character = characterService.findCharacterId(id);
-        if (character != null) {
+    public ResponseEntity<?> delete(@PathVariable int id) {
+        try {
+            Character character = characterService.findCharacterId(id);
             String name = character.getName();
             characterService.deleteCharacter(id);
             String message = name + " is deleted.";
             return new ResponseEntity<>(message, HttpStatus.OK);
-        } else {
-            String message = "Character ID " + id + " not found.";
-            return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+        } catch (RuntimeException e) {
+            return new ResponseEntity<>("Character ID " + id + " not found.", HttpStatus.NOT_FOUND);
         }
     }
 

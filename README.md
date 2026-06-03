@@ -9,12 +9,10 @@ api-rest-sb3
     |            |__ Api
     |            |   |__ Controller
     |            |       |__ CharacterController.java
-    |            |__ DAO
-    |            |   |__ CharacterDAO.java
-    |            |
     |            |__ Entity
     |            |   |__ Character.java
-    |            |
+    |            |__ Repository
+    |            |   |__ CharacterRepository.java
     |            |__ Service
     |                |__ CharacterService.java
     |__ resources
@@ -35,7 +33,7 @@ See more about **[Three-Tier Architecture](https://www.ibm.com/topics/three-tier
 * ```CharacterService.java```: Logic of application methods.
 
 3 - Data tier:
-* ```CharacterDAO.java```: Access the database.
+* ```CharacterRepository.java```: Access the database.
 * ```Character.java```: Represent the database informations.
 
 4 - Others files:
