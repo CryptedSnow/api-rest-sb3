@@ -2,6 +2,7 @@ package com.sb3.apirestsb3.Api.Controller;
 
 import com.sb3.apirestsb3.Entity.Character;
 import com.sb3.apirestsb3.Service.CharacterService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,7 +36,7 @@ public class CharacterController {
     }
 
     @PostMapping("/character")
-    public ResponseEntity<Object> create(@RequestBody Character character, BindingResult bindingResult) {
+    public ResponseEntity<Object> create(@Valid @RequestBody Character character, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return handleValidationErrors(bindingResult);
         }
@@ -66,7 +67,7 @@ public class CharacterController {
     }
 
     @PutMapping("/character/{id}")
-    public ResponseEntity<Object> update(@PathVariable int id, @RequestBody Character character, BindingResult bindingResult) {
+    public ResponseEntity<Object> update(@PathVariable int id, @Valid @RequestBody Character character, BindingResult bindingResult) {
         Character existingCharacter = characterService.findCharacterId(id);
         if (existingCharacter == null) {
             String message = "Character ID " + id + " not found.";
@@ -81,7 +82,7 @@ public class CharacterController {
     }
 
     @PatchMapping("/character/{id}")
-    public ResponseEntity<Object> partialUpdate(@PathVariable int id, @RequestBody Map<String, Object> patchUpdate) {
+    public ResponseEntity<Object> partialUpdate(@PathVariable int id, @Valid @RequestBody Map<String, Object> patchUpdate) {
         try {
             Character updatedCharacter = characterService.updateCharacterPartially(id, patchUpdate);
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(updatedCharacter);
