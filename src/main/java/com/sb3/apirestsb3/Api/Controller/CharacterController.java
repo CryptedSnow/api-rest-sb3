@@ -4,13 +4,16 @@ import com.sb3.apirestsb3.Entity.Character;
 import com.sb3.apirestsb3.Service.CharacterService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -25,17 +28,16 @@ public class CharacterController {
     }
 
     @GetMapping("/characters")
-    public ResponseEntity<?> index() {
-        List<Character> characters = characterService.indexCharacters();
+    public ResponseEntity<?> indexCharacters(@PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.ASC) Pageable pageable) {
+        Page<Character> characters = characterService.indexCharacters(pageable);
         if (characters.isEmpty()) {
-            String message = "No characters found.";
-            return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("No characters found.", HttpStatus.NOT_FOUND);
         }
         return ResponseEntity.ok(characters);
     }
 
     @PostMapping("/character")
-    public ResponseEntity<?> create(@Valid @RequestBody Character character, BindingResult bindingResult) {
+    public ResponseEntity<?> createCharacter(@Valid @RequestBody Character character, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return handleValidationErrors(bindingResult);
         }
@@ -43,29 +45,27 @@ public class CharacterController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdCharacter);
     }
 
-    @GetMapping("/character/search-character")
-    public ResponseEntity<?> searchCharacter(@RequestParam String name) {
-        List<Character> characters = characterService.searchCharacter(name);
+    @GetMapping("/search-character")
+    public ResponseEntity<?> searchCharacter(@RequestParam String name, @PageableDefault(page = 0, size = 10, sort = "name", direction = Sort.Direction.ASC) Pageable pageable) {
+        Page<Character> characters = characterService.searchCharacter(name, pageable);
         if (characters.isEmpty()) {
-            String message = "Character " + name + " not found.";
-            return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("Character " + name + " not found.", HttpStatus.NOT_FOUND);
         }
         return ResponseEntity.ok(characters);
     }
 
     @GetMapping("/character/{id}")
-    public ResponseEntity<?> findId(@PathVariable int id) {
+    public ResponseEntity<?> findCharacterById(@PathVariable int id) {
         try {
             Character character = characterService.findCharacterId(id);
             return ResponseEntity.ok(character);
         } catch (RuntimeException e) {
-            String message = "Character ID " + id + " not found.";
-            return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("Character ID " + id + " not found.", HttpStatus.NOT_FOUND);
         }
     }
 
     @PutMapping("/character/{id}")
-    public ResponseEntity<?> update(@PathVariable int id, @Valid @RequestBody Character character, BindingResult bindingResult) {
+    public ResponseEntity<?> updateCharacter(@PathVariable int id, @Valid @RequestBody Character character, BindingResult bindingResult) {
         try {
             characterService.findCharacterId(id);
         } catch (RuntimeException e) {
@@ -80,10 +80,10 @@ public class CharacterController {
     }
 
     @PatchMapping("/character/{id}")
-    public ResponseEntity<?> partialUpdate(@PathVariable int id, @RequestBody Map<String, Object> patchUpdate) {
+    public ResponseEntity<?> partialUpdateCharacter(@PathVariable int id, @RequestBody Map<String, Object> patchUpdate) {
         try {
-            Character updatedCharacter = characterService.updateCharacterPartially(id, patchUpdate);
-            return ResponseEntity.status(HttpStatus.ACCEPTED).body(updatedCharacter);
+            Character partiallyupdatedCharacter = characterService.updateCharacterPartially(id, patchUpdate);
+            return ResponseEntity.status(HttpStatus.ACCEPTED).body(partiallyupdatedCharacter);
         } catch (RuntimeException e) {
             String message = e.getMessage();
             if (message.contains("not found")) {
@@ -94,13 +94,11 @@ public class CharacterController {
     }
 
     @DeleteMapping("/character/{id}")
-    public ResponseEntity<?> delete(@PathVariable int id) {
+    public ResponseEntity<?> deleteCharacter(@PathVariable int id) {
         try {
             Character character = characterService.findCharacterId(id);
-            String name = character.getName();
             characterService.deleteCharacter(id);
-            String message = name + " is deleted.";
-            return new ResponseEntity<>(message, HttpStatus.OK);
+            return new ResponseEntity<>(character.getName() + " was deleted.", HttpStatus.OK);
         } catch (RuntimeException e) {
             return new ResponseEntity<>("Character ID " + id + " not found.", HttpStatus.NOT_FOUND);
         }

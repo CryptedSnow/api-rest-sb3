@@ -144,64 +144,91 @@ you need use some API platform to perfomate the endpoints, you can use [POSTMAN]
 **GET: localhost:8080/api/characters**
 ```
 // Response - Status: 200 OK
-[
-  {
-    "id": 1,
-    "name": "Mardek Innanu El-Enkidu",
-    "race": "Human",
-    "gender": "Male",
-    "typeClass": "Recruit",
-    "age": 18,
-    "height": 1.78,
-    "element": "Light",
-    "origin": "Goznor",
-    "weapon": "Sword",
-    "alignment": "Lawful Good",
-    "alive": true
-  },
-  {
-    "id": 2,
-    "name": "Deugan Selmae Eh-Deredu",
-    "race": "Human",
-    "gender": "Male",
-    "typeClass": "Recruit",
-    "age": 18,
-    "height": 1.77,
-    "element": "Earth",
-    "origin": "Goznor",
-    "weapon": "Greatsword",
-    "alignment": "Neutral Good",
-    "alive": true
-  },
-  {
-    "id": 3,
-    "name": "Emela Andra Wu-Jardu",
-    "race": "Human",
-    "gender": "Female",
-    "typeClass": "Elemance",
-    "age": 18,
-    "height": 1.75,
-    "element": "Water",
-    "origin": "Water Temple",
-    "weapon": "Rod",
-    "alignment": "Lawful Neutral",
-    "alive": true
-  },
-  {
-    "id": 4,
-    "name": "Vehrn Juonour El-Ganobyi",
-    "race": "Human",
-    "gender": "Male",
-    "typeClass": "Paladin",
-    "age": 25,
-    "height": 1.77,
-    "element": "Light",
-    "origin": "Belfan",
-    "weapon": "Sword",
-    "alignment": "Lawful Good",
-    "alive": true
-  }
-]
+{
+    "content": [
+        {
+            "id": 1,
+            "name": "Mardek Innanu El-Enkidu",
+            "race": "Human",
+            "gender": "Male",
+            "typeClass": "Recruit",
+            "age": 18,
+            "height": 1.78,
+            "element": "Light",
+            "origin": "Goznor",
+            "weapon": "Sword",
+            "alignment": "Lawful Good",
+            "alive": true
+        },
+        {
+            "id": 2,
+            "name": "Deugan Selmae Eh-Deredu",
+            "race": "Human",
+            "gender": "Male",
+            "typeClass": "Recruit",
+            "age": 18,
+            "height": 1.77,
+            "element": "Earth",
+            "origin": "Goznor",
+            "weapon": "Greatsword",
+            "alignment": "Neutral Good",
+            "alive": true
+        },
+        {
+            "id": 3,
+            "name": "Emela Andra Wu-Jardu",
+            "race": "Human",
+            "gender": "Female",
+            "typeClass": "Elemance",
+            "age": 18,
+            "height": 1.75,
+            "element": "Water",
+            "origin": "Water Temple",
+            "weapon": "Rod",
+            "alignment": "Lawful Neutral",
+            "alive": true
+        },
+        {
+            "id": 4,
+            "name": "Vehrn Juonour El-Ganobyi",
+            "race": "Human",
+            "gender": "Male",
+            "typeClass": "Paladin",
+            "age": 25,
+            "height": 1.77,
+            "element": "Light",
+            "origin": "Belfan",
+            "weapon": "Sword",
+            "alignment": "Lawful Good",
+            "alive": true
+        }
+    ],
+    "pageable": {
+        "pageNumber": 0,
+        "pageSize": 10,
+        "sort": {
+            "sorted": true,
+            "empty": false,
+            "unsorted": false
+        },
+        "offset": 0,
+        "paged": true,
+        "unpaged": false
+    },
+    "last": true,
+    "totalPages": 1,
+    "totalElements": 4,
+    "size": 10,
+    "number": 0,
+    "sort": {
+        "sorted": true,
+        "empty": false,
+        "unsorted": false
+    },
+    "first": true,
+    "numberOfElements": 4,
+    "empty": false
+}
 ```
 
 **POST: localhost:8080/api/character**
@@ -240,8 +267,8 @@ you need use some API platform to perfomate the endpoints, you can use [POSTMAN]
 }
 ```
 
-**GET: localhost:8080/api/character/id**
-- You need change **id** for **5**.
+**GET: localhost:8080/api/character/{id}**
+- You need change **{id}** for **5**.
 ```
 // Response - Status: 200 OK
 {
@@ -260,30 +287,57 @@ you need use some API platform to perfomate the endpoints, you can use [POSTMAN]
 }
 ```
 
-**GET: localhost:8080/api/character/search-character?name=**
+**GET: localhost:8080/api/search-character?name=**
 - You need change **name=** for **name=Sirene**
 ```
 // Response - Status: 200 OK
-[
-  {
-    "id": 5,
-    "name": "Elwyen Sirene Wu-Nympha",
-    "race": "Human",
-    "gender": "Female",
-    "typeClass": "Youngling",
-    "age": 14,
-    "height": 1.61,
-    "element": "Water",
-    "origin": "Canonia",
-    "weapon": "Harp",
-    "alignment": "Chaotic Neutral",
-    "alive": true
-  }
-]
+{
+    "content": [
+        {
+            "id": 5,
+            "name": "Elwyen Sirene Wu-Nympha",
+            "race": "Human",
+            "gender": "Female",
+            "typeClass": "Youngling",
+            "age": 14,
+            "height": 1.61,
+            "element": "Water",
+            "origin": "Canonia",
+            "weapon": "Harp",
+            "alignment": "Chaotic Neutral",
+            "alive": true
+        }
+    ],
+    "pageable": {
+        "pageNumber": 0,
+        "pageSize": 10,
+        "sort": {
+            "sorted": true,
+            "empty": false,
+            "unsorted": false
+        },
+        "offset": 0,
+        "paged": true,
+        "unpaged": false
+    },
+    "last": true,
+    "totalPages": 1,
+    "totalElements": 1,
+    "size": 10,
+    "number": 0,
+    "sort": {
+        "sorted": true,
+        "empty": false,
+        "unsorted": false
+    },
+    "first": true,
+    "numberOfElements": 1,
+    "empty": false
+}
 ```
 
-**PUT: localhost:8080/api/character/id**
-- You need change **id** for **5**.
+**PUT: localhost:8080/api/character/{id}**
+- You need change **{id}** for **5**.
 ```
 // JSON body
 {
@@ -319,8 +373,8 @@ you need use some API platform to perfomate the endpoints, you can use [POSTMAN]
 }
 ```
 
-**PATCH: localhost:8080/api/character/id**
-- You need change **id** for **5**.
+**PATCH: localhost:8080/api/character/{id}**
+- You need change **{id}** for **5**.
 ```
 // JSON body
 {
@@ -350,7 +404,7 @@ you need use some API platform to perfomate the endpoints, you can use [POSTMAN]
 - You need change **id** for **5**.
 ```
 // Response - Status: 200 OK
-Elwyen Sirene Wu-Nympha is deleted.
+Elwyen Sirene Wu-Nympha was deleted.
 ```
 
 ### Reference

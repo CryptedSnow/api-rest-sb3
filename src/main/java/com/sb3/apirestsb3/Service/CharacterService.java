@@ -2,10 +2,11 @@ package com.sb3.apirestsb3.Service;
 
 import com.sb3.apirestsb3.Repository.CharacterRepository;
 import com.sb3.apirestsb3.Entity.Character;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Field;
-import java.util.List;
 import java.util.Map;
 
 @Service
@@ -17,8 +18,8 @@ public class CharacterService {
         this.characterRepository = characterRepository;
     }
 
-    public List<Character> indexCharacters() {
-        return characterRepository.findAll();
+    public Page<Character> indexCharacters(Pageable pageable) {
+        return characterRepository.findAll(pageable);
     }
 
     public Character createCharacter(Character character) {
@@ -29,8 +30,8 @@ public class CharacterService {
         return characterRepository.findById(id).orElseThrow(() -> new RuntimeException("Character ID " + id + " not found."));
     }
 
-    public List<Character> searchCharacter(String name) {
-        return characterRepository.findByNameContainingIgnoreCase(name);
+    public Page<Character> searchCharacter(String name, Pageable pageable) {
+        return characterRepository.findByNameContainingIgnoreCase(name, pageable);
     }
 
     public Character updateCharacter(Character character) {
