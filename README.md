@@ -132,10 +132,11 @@ VALUES
 ('Mardek Innanu El-Enkidu', 'Human', 'Male', 'Recruit', 18, 1.78, 'Light', 'Goznor', 'Sword', 'Lawful Good', true),
 ('Deugan Selmae Eh-Deredu', 'Human', 'Male', 'Recruit', 18, 1.77, 'Earth', 'Goznor', 'Greatsword', 'Neutral Good', true),
 ('Emela Andra Wu-Jardu', 'Human', 'Female', 'Elemance', 18, 1.75, 'Water', 'Water Temple', 'Rod', 'Lawful Neutral', true),
-('Vehrn Juonour El-Ganobyi', 'Human', 'Male', 'Paladin', 25, 1.77, 'Light', 'Belfan', 'Sword', 'Lawful Good', true);
+('Vehrn Juonour El-Ganobyi', 'Human', 'Male', 'Paladin', 25, 1.77, 'Light', 'Belfan', 'Sword', 'Lawful Good', true),
+('Zach Ursus Ae-Jarino', 'Human', 'Male', 'Mercenary', 30, 1.78, 'Air', 'Belfan', 'Doublesword', 'Lawful Neutral', true);
 ```
 
-## API REST endpoints
+## API's REST endpoints
 
 To endpoint tests on **Swagger UI**:
 ```
@@ -148,93 +149,108 @@ To endpoint tests on your machine you need use some API platform to perfomate th
 - Response: 200 OK
 ```
 {
-    "content": [
-        {
-            "id": 1,
-            "name": "Mardek Innanu El-Enkidu",
-            "race": "Human",
-            "gender": "Male",
-            "typeClass": "Recruit",
-            "age": 18,
-            "height": 1.78,
-            "element": "Light",
-            "origin": "Goznor",
-            "weapon": "Sword",
-            "alignment": "Lawful Good",
-            "alive": true
-        },
-        {
-            "id": 2,
-            "name": "Deugan Selmae Eh-Deredu",
-            "race": "Human",
-            "gender": "Male",
-            "typeClass": "Recruit",
-            "age": 18,
-            "height": 1.77,
-            "element": "Earth",
-            "origin": "Goznor",
-            "weapon": "Greatsword",
-            "alignment": "Neutral Good",
-            "alive": true
-        },
-        {
-            "id": 3,
-            "name": "Emela Andra Wu-Jardu",
-            "race": "Human",
-            "gender": "Female",
-            "typeClass": "Elemance",
-            "age": 18,
-            "height": 1.75,
-            "element": "Water",
-            "origin": "Water Temple",
-            "weapon": "Rod",
-            "alignment": "Lawful Neutral",
-            "alive": true
-        },
-        {
-            "id": 4,
-            "name": "Vehrn Juonour El-Ganobyi",
-            "race": "Human",
-            "gender": "Male",
-            "typeClass": "Paladin",
-            "age": 25,
-            "height": 1.77,
-            "element": "Light",
-            "origin": "Belfan",
-            "weapon": "Sword",
-            "alignment": "Lawful Good",
-            "alive": true
-        }
-    ],
-    "pageable": {
-        "pageNumber": 0,
-        "pageSize": 10,
-        "sort": {
-            "sorted": true,
-            "empty": false,
-            "unsorted": false
-        },
-        "offset": 0,
-        "paged": true,
-        "unpaged": false
+  "content": [
+    {
+      "id": 1,
+      "name": "Mardek Innanu El-Enkidu",
+      "race": "Human",
+      "gender": "Male",
+      "typeClass": "Recruit",
+      "age": 18,
+      "height": 1.78,
+      "element": "Light",
+      "origin": "Goznor",
+      "weapon": "Sword",
+      "alignment": "Lawful Good",
+      "alive": true
     },
-    "last": true,
-    "totalPages": 1,
-    "totalElements": 4,
-    "size": 10,
-    "number": 0,
+    {
+      "id": 2,
+      "name": "Deugan Selmae Eh-Deredu",
+      "race": "Human",
+      "gender": "Male",
+      "typeClass": "Recruit",
+      "age": 18,
+      "height": 1.77,
+      "element": "Earth",
+      "origin": "Goznor",
+      "weapon": "Greatsword",
+      "alignment": "Neutral Good",
+      "alive": true
+    },
+    {
+      "id": 3,
+      "name": "Emela Andra Wu-Jardu",
+      "race": "Human",
+      "gender": "Female",
+      "typeClass": "Elemance",
+      "age": 18,
+      "height": 1.75,
+      "element": "Water",
+      "origin": "Water Temple",
+      "weapon": "Rod",
+      "alignment": "Lawful Neutral",
+      "alive": true
+    },
+    {
+      "id": 4,
+      "name": "Vehrn Juonour El-Ganobyi",
+      "race": "Human",
+      "gender": "Male",
+      "typeClass": "Paladin",
+      "age": 25,
+      "height": 1.77,
+      "element": "Light",
+      "origin": "Belfan",
+      "weapon": "Sword",
+      "alignment": "Lawful Good",
+      "alive": true
+    },
+    {
+      "id": 5,
+      "name": "Zach Ursus Ae-Jarino",
+      "race": "Human",
+      "gender": "Male",
+      "typeClass": "Mercenary",
+      "age": 30,
+      "height": 1.78,
+      "element": "Air",
+      "origin": "Belfan",
+      "weapon": "Doublesword",
+      "alignment": "Lawful Neutral",
+      "alive": true
+    }
+  ],
+  "pageable": {
+    "pageNumber": 0,
+    "pageSize": 10,
     "sort": {
-        "sorted": true,
-        "empty": false,
-        "unsorted": false
+      "sorted": true,
+      "empty": false,
+      "unsorted": false
     },
-    "first": true,
-    "numberOfElements": 4,
-    "empty": false
+    "offset": 0,
+    "paged": true,
+    "unpaged": false
+  },
+  "totalElements": 5,
+  "totalPages": 1,
+  "last": true,
+  "size": 10,
+  "number": 0,
+  "sort": {
+    "sorted": true,
+    "empty": false,
+    "unsorted": false
+  },
+  "numberOfElements": 5,
+  "first": true,
+  "empty": false
 }
 ```
 
 **POST: localhost:8080/api/character**
+
 **JSON body**
 ```
 {
@@ -255,7 +271,7 @@ To endpoint tests on your machine you need use some API platform to perfomate th
 - Response: 201 Created
 ```
 {
-  "id": 5,
+  "id": 6,
   "name": "Elwyen Sirene Wu-Nympha",
   "race": "Human",
   "gender": "Female",
@@ -271,11 +287,11 @@ To endpoint tests on your machine you need use some API platform to perfomate th
 ```
 
 **GET: localhost:8080/api/character/{id}**
-- You need change **{id}** for **5**.
+- You need change **{id}** for **6**.
 - Response: 200 OK
 ```
 {
-  "id": 5,
+  "id": 6,
   "name": "Elwyen Sirene Wu-Nympha",
   "race": "Human",
   "gender": "Female",
@@ -295,52 +311,53 @@ To endpoint tests on your machine you need use some API platform to perfomate th
 - Response: 200 OK
 ```
 {
-    "content": [
-        {
-            "id": 5,
-            "name": "Elwyen Sirene Wu-Nympha",
-            "race": "Human",
-            "gender": "Female",
-            "typeClass": "Youngling",
-            "age": 14,
-            "height": 1.61,
-            "element": "Water",
-            "origin": "Canonia",
-            "weapon": "Harp",
-            "alignment": "Chaotic Neutral",
-            "alive": true
-        }
-    ],
-    "pageable": {
-        "pageNumber": 0,
-        "pageSize": 10,
-        "sort": {
-            "sorted": true,
-            "empty": false,
-            "unsorted": false
-        },
-        "offset": 0,
-        "paged": true,
-        "unpaged": false
-    },
-    "last": true,
-    "totalPages": 1,
-    "totalElements": 1,
-    "size": 10,
-    "number": 0,
+  "content": [
+    {
+      "id": 6,
+      "name": "Elwyen Sirene Wu-Nympha",
+      "race": "Human",
+      "gender": "Female",
+      "typeClass": "Youngling",
+      "age": 14,
+      "height": 1.61,
+      "element": "Water",
+      "origin": "Canonia",
+      "weapon": "Harp",
+      "alignment": "Chaotic Neutral",
+      "alive": true
+    }
+  ],
+  "pageable": {
+    "pageNumber": 0,
+    "pageSize": 10,
     "sort": {
-        "sorted": true,
-        "empty": false,
-        "unsorted": false
+      "sorted": true,
+      "empty": false,
+      "unsorted": false
     },
-    "first": true,
-    "numberOfElements": 1,
-    "empty": false
+    "offset": 0,
+    "paged": true,
+    "unpaged": false
+  },
+  "totalElements": 1,
+  "totalPages": 1,
+  "last": true,
+  "size": 10,
+  "number": 0,
+  "sort": {
+    "sorted": true,
+    "empty": false,
+    "unsorted": false
+  },
+  "numberOfElements": 1,
+  "first": true,
+  "empty": false
 }
 ```
 
 **PUT: localhost:8080/api/character/{id}**
-- You need change **{id}** for **5**.
+- You need change **{id}** for **6**.
+- I changed 1.61 m to 1.65 m.
 
 **JSON body**
 ```
@@ -350,7 +367,7 @@ To endpoint tests on your machine you need use some API platform to perfomate th
   "gender": "Female",
   "typeClass": "Youngling",
   "age": 14,
-  "height": 1.65, // I changed 1.61 m to 1.65 m
+  "height": 1.65,
   "element": "Water",
   "origin": "Canonia",
   "weapon": "Harp",
@@ -362,7 +379,7 @@ To endpoint tests on your machine you need use some API platform to perfomate th
 - Response: 202 Accepted
 ```
 {
-  "id": 5,
+  "id": 6,
   "name": "Elwyen Sirene Wu-Nympha",
   "race": "Human",
   "gender": "Female",
@@ -378,8 +395,8 @@ To endpoint tests on your machine you need use some API platform to perfomate th
 ```
 
 **PATCH: localhost:8080/api/character/{id}**
-- You need change **{id}** for **5**.
-- I changed 1.61 m to 1.65 m
+- You need change **{id}** for **6**.
+- I changed 1.61 m to 1.65 m.
 
 **JSON body**
 ```
@@ -390,7 +407,7 @@ To endpoint tests on your machine you need use some API platform to perfomate th
 - Response: 202 Accepted
 ```
 {
-  "id": 5,
+  "id": 6,
   "name": "Elwyen Sirene Wu-Nympha",
   "race": "Human",
   "gender": "Female",
@@ -406,7 +423,7 @@ To endpoint tests on your machine you need use some API platform to perfomate th
 ```
 
 **DELETE: localhost:8080/api/character/{id}**
-- You need change **{id}** for **5**. 
+- You need change **{id}** for **6**. 
 - Response: 200 OK
 ```
 Elwyen Sirene Wu-Nympha was deleted.
