@@ -107,8 +107,7 @@ CREATE TABLE characters (
     origin VARCHAR(15) NOT NULL,
     weapon VARCHAR(15) NOT NULL,
     alignment VARCHAR(15) NOT NULL,
-    alive BOOLEAN NOT NULL,
-    deleted_at TIMESTAMP
+    alive BOOLEAN NOT NULL
 );
 
 -- PostgreSQL
@@ -124,8 +123,7 @@ CREATE TABLE characters (
     origin VARCHAR(15) NOT NULL,
     weapon VARCHAR(15) NOT NULL,
     alignment VARCHAR(15) NOT NULL,
-    alive BOOLEAN NOT NULL,
-    deleted_at TIMESTAMP
+    alive BOOLEAN NOT NULL
 );
 
 -- Insert lines
@@ -137,13 +135,18 @@ VALUES
 ('Vehrn Juonour El-Ganobyi', 'Human', 'Male', 'Paladin', 25, 1.77, 'Light', 'Belfan', 'Sword', 'Lawful Good', true);
 ```
 
-## API REST endpoints 
+## API REST endpoints
 
-you need use some API platform to perfomate the endpoints, you can use [POSTMAN](https://www.postman.com/) for example.
+To endpoint tests on **Swagger UI**:
+```
+localhost:8080/swagger-ui/index.html
+```
+
+To endpoint tests on your machine you need use some API platform to perfomate the endpoints, you can use [POSTMAN](https://www.postman.com/) for example.
 
 **GET: localhost:8080/api/characters**
+- Response: 200 OK
 ```
-// Response - Status: 200 OK
 {
     "content": [
         {
@@ -232,8 +235,8 @@ you need use some API platform to perfomate the endpoints, you can use [POSTMAN]
 ```
 
 **POST: localhost:8080/api/character**
+**JSON body**
 ```
-// JSON body
 {
   "name": "Elwyen Sirene Wu-Nympha",
   "race": "Human",
@@ -249,8 +252,8 @@ you need use some API platform to perfomate the endpoints, you can use [POSTMAN]
 }
 ```
 
+- Response: 201 Created
 ```
-// Response - Status: 201 Created
 {
   "id": 5,
   "name": "Elwyen Sirene Wu-Nympha",
@@ -269,8 +272,8 @@ you need use some API platform to perfomate the endpoints, you can use [POSTMAN]
 
 **GET: localhost:8080/api/character/{id}**
 - You need change **{id}** for **5**.
+- Response: 200 OK
 ```
-// Response - Status: 200 OK
 {
   "id": 5,
   "name": "Elwyen Sirene Wu-Nympha",
@@ -289,8 +292,8 @@ you need use some API platform to perfomate the endpoints, you can use [POSTMAN]
 
 **GET: localhost:8080/api/search-character?name=**
 - You need change **name=** for **name=Sirene**
+- Response: 200 OK
 ```
-// Response - Status: 200 OK
 {
     "content": [
         {
@@ -338,8 +341,9 @@ you need use some API platform to perfomate the endpoints, you can use [POSTMAN]
 
 **PUT: localhost:8080/api/character/{id}**
 - You need change **{id}** for **5**.
+
+**JSON body**
 ```
-// JSON body
 {
   "name": "Elwyen Sirene Wu-Nympha",
   "race": "Human",
@@ -355,8 +359,8 @@ you need use some API platform to perfomate the endpoints, you can use [POSTMAN]
 }
 ```
 
+- Response: 202 Accepted
 ```
-// Response - Status: 202 Accepted
 {
   "id": 5,
   "name": "Elwyen Sirene Wu-Nympha",
@@ -375,15 +379,16 @@ you need use some API platform to perfomate the endpoints, you can use [POSTMAN]
 
 **PATCH: localhost:8080/api/character/{id}**
 - You need change **{id}** for **5**.
+- I changed 1.61 m to 1.65 m
+
+**JSON body**
 ```
-// JSON body
 {
-  "height": 1.65 // I changed 1.61 m to 1.65 m
+  "height": 1.65
 }
 ```
-
+- Response: 202 Accepted
 ```
-// Response - Status: 202 Accepted
 {
   "id": 5,
   "name": "Elwyen Sirene Wu-Nympha",
@@ -400,10 +405,10 @@ you need use some API platform to perfomate the endpoints, you can use [POSTMAN]
 }
 ```
 
-**DELETE: localhost:8080/api/character/id**
-- You need change **id** for **5**.
+**DELETE: localhost:8080/api/character/{id}**
+- You need change **{id}** for **5**. 
+- Response: 200 OK
 ```
-// Response - Status: 200 OK
 Elwyen Sirene Wu-Nympha was deleted.
 ```
 
