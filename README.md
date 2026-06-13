@@ -138,12 +138,10 @@ VALUES
 
 ## API's REST endpoints
 
-To endpoint tests on **Swagger UI**:
+To endpoint tests on **Swagger**:
 ```
 localhost:8080/swagger-ui/index.html
 ```
-
-To endpoint tests on your machine you need use some API platform to perfomate the endpoints, you can use [POSTMAN](https://www.postman.com/) for example.
 
 **GET: localhost:8080/api/characters**
 - Response: 200 OK
