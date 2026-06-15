@@ -50,7 +50,7 @@ public class CharacterController {
     @Operation(summary = "Create character")
     @ApiResponses({
             @ApiResponse(responseCode = "201", description = "Created character"),
-            @ApiResponse(responseCode = "400", description = "Invalid data to request")
+            @ApiResponse(responseCode = "422", description = "Invalid data to request")
     })
     @PostMapping("/character")
     public ResponseEntity<?> create(@Valid @RequestBody Character character, BindingResult bindingResult) {
@@ -93,8 +93,8 @@ public class CharacterController {
     @Operation(summary = "Update character by ID")
     @ApiResponses({
             @ApiResponse(responseCode = "202", description = "Character updated"),
-            @ApiResponse(responseCode = "400", description = "Invalid data to request"),
-            @ApiResponse(responseCode = "404", description = "Character not found")
+            @ApiResponse(responseCode = "404", description = "Character not found"),
+            @ApiResponse(responseCode = "422", description = "Invalid data to request")
     })
     @PutMapping("/character/{id}")
     public ResponseEntity<?> update(@PathVariable int id, @Valid @RequestBody Character character, BindingResult bindingResult) {
@@ -114,8 +114,8 @@ public class CharacterController {
     @Operation(summary = "Update partially character by ID")
     @ApiResponses({
             @ApiResponse(responseCode = "202", description = "Character was partially updated"),
-            @ApiResponse(responseCode = "400", description = "Invalid request"),
-            @ApiResponse(responseCode = "404", description = "Character not found")
+            @ApiResponse(responseCode = "404", description = "Character not found"),
+            @ApiResponse(responseCode = "422", description = "Invalid data to request")
     })
     @PatchMapping("/character/{id}")
     public ResponseEntity<?> partialUpdate(@PathVariable int id, @RequestBody Map<String, Object> patchUpdate) {
