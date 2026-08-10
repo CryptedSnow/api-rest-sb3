@@ -16,7 +16,15 @@ api-rest-sb3
     |            |__ Service
     |                |__ CharacterService.java
     |__ resources
-        |__ application.properties
+    |    |__ application.properties
+    |__ test
+    |    |__ java
+    |        |__ com.sb3.apirestsb3
+    |            |__ Api
+    |            |   |__ Controller
+    |            |       |__ CharacterControllerTest.java
+    |            |__ Service
+    |                |__ CharacterServiceTest.java
 ```
 
 It is necessary install ```JDK```, the minimum version to perfomate Spring Boot 3 is **17** (I usually use **JDK 21** version). Don't forget about to use [IntelliJ IDEA](https://www.jetbrains.com/idea/) to facilitate your experience.
@@ -36,7 +44,11 @@ See more about **[Three-Tier Architecture](https://www.ibm.com/topics/three-tier
 * ```CharacterRepository.java```: Access the database.
 * ```Character.java```: Represent the database informations.
 
-4 - Others files:
+4 - Data tier:
+* ```CharacterServiceTest.java```: Layer test to Service.
+* ```CharacterControllerTest.java```: Layer test to Controller.
+
+5 - Others files:
 * ```application.properties```: Application settings file.
 
 ## Database
@@ -427,5 +439,21 @@ localhost:8080/swagger-ui/index.html
 Elwyen Sirene Wu-Nympha was deleted.
 ```
 
-### Reference
+### JAVA tests
+
+It is possible use ```Mockito``` to make automatic tests:
+
+```
+./mvnw test -Dtest=CharacterServiceTest
+./mvnw test -Dtest=CharacterControllerTest
+```
+
+Case you want to test determined method of some test file, use this example
+```
+./mvnw test -Dtest=CharacterControllerTest#indCharacters
+```
+
+It is not necessecary use ```Docker``` ou ```database```.
+
+### References
 - **[Mardek (Series)](https://figverse.fandom.com/wiki/MARDEK_(Series))**
