@@ -441,7 +441,7 @@ Elwyen Sirene Wu-Nympha was deleted.
 
 ### JAVA tests
 
-It is possible use ```Mockito``` to make automatic tests:
+It's possible use ```Mockito``` to make automatic tests:
 
 ```
 ./mvnw test -Dtest=CharacterServiceTest
@@ -453,7 +453,7 @@ Case you want to test determined method of some test file, use this example
 ./mvnw test -Dtest=CharacterControllerTest#indCharacters
 ```
 
-It is not necessecary use ```Docker``` ou ```database```.
+It's not necessary use ```Docker``` ou ```database```.
 
 ### References
 - **[Mardek (Series)](https://figverse.fandom.com/wiki/MARDEK_(Series))**
