@@ -17,6 +17,14 @@ api-rest-sb3
     |                |__ CharacterService.java
     |__ resources
     |    |__ application.properties
+    |    |__ database
+    |        |__ migrations
+    |            |__ MySQL
+    |            |    |__ V1__create_characters_table.sql
+    |            |    |__ V2__insert_characters.sql
+    |            |__ PostgreSQL
+    |                 |__ V1__create_characters_table.sql
+    |                 |__ V2__insert_characters.sql
     |__ test
     |    |__ java
     |        |__ com.sb3.apirestsb3
@@ -87,6 +95,32 @@ spring.datasource.password=password
 spring.datasource.driver-class-name=org.postgresql.Driver
 ```
 
+```Flyway``` to insert the lines:
+
+```
+# MySQL
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
+spring.flyway.locations=classpath:database/migrations/MySQL
+
+# Postgres
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+spring.flyway.locations=classpath:database/migrations/PostgreSQL
+```
+
+```Flyway``` command without ```Docker```:
+```
+# MySQL
+java -jar target/*.jar --spring.profiles.active=mysql
+
+# PostgreSQL
+java -jar target/*.jar --spring.profiles.active=postgres
+```
+
+```Flyway``` command with ```Docker```:
+```
+docker compose up -d --build
+```
+
 ### Panels
 
 - phpMyAdmin: http://localhost:8081
@@ -103,51 +137,6 @@ To create a server to pgAdmin:
 - Username:	```user```
 - Password:	```password```
 
-2 - Create a table called ```characters``` (the table name is configured in ```CharacterEntity.java```), then insert this code snippet to speed up the process.
-
-```
--- MySQL
-CREATE TABLE characters (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(50) NOT NULL,
-    race VARCHAR(15) NOT NULL,
-    gender VARCHAR(15) NOT NULL,
-    type_class VARCHAR(15) NOT NULL,
-    age INT NOT NULL,
-    height DECIMAL(3,2) NOT NULL,
-    element VARCHAR(15) NOT NULL,
-    origin VARCHAR(15) NOT NULL,
-    weapon VARCHAR(15) NOT NULL,
-    alignment VARCHAR(15) NOT NULL,
-    alive BOOLEAN NOT NULL
-);
-
--- PostgreSQL
-CREATE TABLE characters (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(50) NOT NULL,
-    race VARCHAR(15) NOT NULL,
-    gender VARCHAR(15) NOT NULL,
-    type_class VARCHAR(15) NOT NULL,
-    age INT NOT NULL,
-    height DECIMAL(3,2) NOT NULL,
-    element VARCHAR(15) NOT NULL,
-    origin VARCHAR(15) NOT NULL,
-    weapon VARCHAR(15) NOT NULL,
-    alignment VARCHAR(15) NOT NULL,
-    alive BOOLEAN NOT NULL
-);
-
--- Insert lines
-INSERT INTO characters (name, race, gender, type_class, age, height, element, origin, weapon, alignment, alive) 
-VALUES
-('Mardek Innanu El-Enkidu', 'Human', 'Male', 'Recruit', 18, 1.78, 'Light', 'Goznor', 'Sword', 'Lawful Good', true),
-('Deugan Selmae Eh-Deredu', 'Human', 'Male', 'Recruit', 18, 1.77, 'Earth', 'Goznor', 'Greatsword', 'Neutral Good', true),
-('Emela Andra Wu-Jardu', 'Human', 'Female', 'Elemance', 18, 1.75, 'Water', 'Water Temple', 'Rod', 'Lawful Neutral', true),
-('Vehrn Juonour El-Ganobyi', 'Human', 'Male', 'Paladin', 25, 1.77, 'Light', 'Belfan', 'Sword', 'Lawful Good', true),
-('Zach Ursus Ae-Jarino', 'Human', 'Male', 'Mercenary', 30, 1.78, 'Air', 'Belfan', 'Doublesword', 'Lawful Neutral', true);
-```
-
 ## API's REST endpoints
 
 To endpoint tests on **Swagger**:
@@ -156,7 +145,7 @@ localhost:8080/swagger-ui/index.html
 ```
 
 **GET: localhost:8080/api/characters**
-- Response: 200 OK
+- Response: **200 OK**
 ```
 {
   "content": [
@@ -278,7 +267,7 @@ localhost:8080/swagger-ui/index.html
 }
 ```
 
-- Response: 201 Created
+- Response: **201 Created**
 ```
 {
   "id": 6,
@@ -298,7 +287,7 @@ localhost:8080/swagger-ui/index.html
 
 **GET: localhost:8080/api/character/{id}**
 - You need change **{id}** for **6**.
-- Response: 200 OK
+- Response: **200 OK**
 ```
 {
   "id": 6,
@@ -318,7 +307,7 @@ localhost:8080/swagger-ui/index.html
 
 **GET: localhost:8080/api/search-character?name=**
 - You need change **name=** for **name=Sirene**
-- Response: 200 OK
+- Response: **200 OK**
 ```
 {
   "content": [
@@ -386,7 +375,7 @@ localhost:8080/swagger-ui/index.html
 }
 ```
 
-- Response: 202 Accepted
+- Response: **202 Accepted**
 ```
 {
   "id": 6,
@@ -414,7 +403,7 @@ localhost:8080/swagger-ui/index.html
   "height": 1.65
 }
 ```
-- Response: 202 Accepted
+- Response: **202 Accepted**
 ```
 {
   "id": 6,
@@ -434,7 +423,7 @@ localhost:8080/swagger-ui/index.html
 
 **DELETE: localhost:8080/api/character/{id}**
 - You need change **{id}** for **6**. 
-- Response: 200 OK
+- Response: **200 OK**
 ```
 Elwyen Sirene Wu-Nympha was deleted.
 ```
