@@ -4,6 +4,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
+import java.math.BigDecimal;
+
 @Entity
 @Table(name="characters")
 public class Character {
@@ -47,7 +49,7 @@ public class Character {
     @DecimalMin(value = "1.50", message = "Height must has min 1.50m.")
     @DecimalMax(value = "2.50", message = "Height must has max 2.50m.")
     @Column(name="height")
-    private Float height;
+    private BigDecimal height;
 
     @Schema(description = "Character element", example = "Water")
     @NotBlank(message = "Element is required.")
@@ -82,7 +84,7 @@ public class Character {
 
     }
 
-    public Character(int id, String name, String race, String gender, String typeClass, Integer age, Float height, String element, String origin, String weapon, String alignment, Boolean alive) {
+    public Character(int id, String name, String race, String gender, String typeClass, Integer age, BigDecimal height, String element, String origin, String weapon, String alignment, Boolean alive) {
         this.id = id;
         this.name = name;
         this.race = race;
@@ -145,11 +147,11 @@ public class Character {
         this.age = age;
     }
 
-    public Float getHeight() {
+    public BigDecimal getHeight() {
         return height;
     }
 
-    public void setHeight(Float height) {
+    public void setHeight(BigDecimal height) {
         this.height = height;
     }
 

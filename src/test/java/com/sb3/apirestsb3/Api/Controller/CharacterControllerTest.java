@@ -13,6 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -42,7 +43,7 @@ class CharacterControllerTest {
         character.setGender("Male");
         character.setTypeClass("Recruit");
         character.setAge(18);
-        character.setHeight(1.78f);
+        character.setHeight(BigDecimal.valueOf(1.78f));
         character.setElement("Light");
         character.setOrigin("Goznor");
         character.setWeapon("Sword");
@@ -119,7 +120,7 @@ class CharacterControllerTest {
     @DisplayName("PATCH: /api/character/{id} → 202")
     void partiallyUpdateCharacter() throws Exception {
         Character updated = createSampleCharacter();
-        updated.setHeight(1.85f);
+        updated.setHeight(BigDecimal.valueOf(1.85f));
         when(characterService.updateCharacterPartially(eq(1), any(Map.class))).thenReturn(updated);
         mockMvc.perform(patch("/api/character/1")
                         .contentType(MediaType.APPLICATION_JSON)

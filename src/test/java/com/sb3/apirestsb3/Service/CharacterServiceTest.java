@@ -12,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -38,7 +39,7 @@ public class CharacterServiceTest {
         character.setGender("Male");
         character.setTypeClass("Recruit");
         character.setAge(18);
-        character.setHeight(1.78f);
+        character.setHeight(BigDecimal.valueOf(1.78f));
         character.setElement("Light");
         character.setOrigin("Goznor");
         character.setWeapon("Sword");

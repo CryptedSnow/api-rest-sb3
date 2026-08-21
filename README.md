@@ -56,7 +56,11 @@ See more about **[Three-Tier Architecture](https://www.ibm.com/topics/three-tier
 * ```CharacterServiceTest.java```: Layer test to Service.
 * ```CharacterControllerTest.java```: Layer test to Controller.
 
-5 - Others files:
+5 - Migrations:
+* ```MySQL``` folder: Migrations to MySQL.
+* ```PostgreSQL``` folder: Migrations to PostgreSQL.
+
+6 - Others files:
 * ```application.properties```: Application settings file.
 
 ## Database
