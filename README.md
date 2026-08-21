@@ -99,7 +99,7 @@ spring.datasource.password=password
 spring.datasource.driver-class-name=org.postgresql.Driver
 ```
 
-```Flyway``` to insert the lines:
+2 - Use ```Flyway``` to to ```application.properties``` and insert the lines:
 
 ```
 # MySQL
@@ -111,7 +111,7 @@ spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
 spring.flyway.locations=classpath:database/migrations/PostgreSQL
 ```
 
-```Flyway``` command without ```Docker```:
+3 - Now, execute ```Flyway``` command without ```Docker```:
 ```
 # MySQL
 java -jar target/*.jar --spring.profiles.active=mysql
@@ -120,7 +120,7 @@ java -jar target/*.jar --spring.profiles.active=mysql
 java -jar target/*.jar --spring.profiles.active=postgres
 ```
 
-```Flyway``` command with ```Docker```:
+Case you if want use ```Docker```, use this command:
 ```
 docker compose up -d --build
 ```
@@ -434,7 +434,7 @@ Elwyen Sirene Wu-Nympha was deleted.
 
 ### JAVA tests
 
-It's possible use ```Mockito``` to make automatic tests:
+It's possible use ```JUnit``` and ```Mockito``` to make automatic tests:
 
 ```
 ./mvnw test -Dtest=CharacterServiceTest
@@ -443,7 +443,7 @@ It's possible use ```Mockito``` to make automatic tests:
 
 Case you want to test determined method of some test file, use this example
 ```
-./mvnw test -Dtest=CharacterControllerTest#indCharacters
+./mvnw test -Dtest=CharacterControllerTest#indexCharacters
 ```
 
 It's not necessary use ```Docker``` ou ```database```.
